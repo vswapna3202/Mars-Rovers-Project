@@ -23,20 +23,22 @@ public class UserInterfaceTest {
 
     @Test
     public void testGetPlateauSizeValidData(){
-        systemInputMock.provideLines(MarsRoverTestData.plateauSize);
-        assertEquals(MarsRoverTestData.plateauSize, userInterface.getPlateauSize());
+        systemInputMock.provideLines(MarsRoverTestData.plateauSizeList.get(0));
+        assertEquals(MarsRoverTestData.plateauSizeList.get(0),
+                userInterface.getPlateauSize());
     }
 
     @Test
     public void testGetPlateauSizeInvalidData(){
         systemInputMock.provideLines(null,"","5, 5","A B","% $","1  2  ");
-        assertEquals(MarsRoverTestData.plateauSizeWithSpaces, userInterface.getPlateauSize());
+        assertEquals("1  2", userInterface.getPlateauSize());
     }
 
     @Test
     public void testGetRoverPositionValidData() {
-        systemInputMock.provideLines(MarsRoverTestData.roverOnePosition);
-        assertEquals(MarsRoverTestData.roverOnePosition, userInterface.getRoverPosition());
+        systemInputMock.provideLines(MarsRoverTestData.roverPositions.get(0));
+        assertEquals(MarsRoverTestData.roverPositions.get(0),
+                userInterface.getRoverPosition());
     }
 
     @Test
@@ -47,8 +49,8 @@ public class UserInterfaceTest {
 
     @Test
     public void testGetRoverInstructionValidData() {
-        systemInputMock.provideLines(MarsRoverTestData.roverOneInstruction);
-        assertEquals(MarsRoverTestData.roverOneInstruction, userInterface.getRoverInstruction());
+        systemInputMock.provideLines(MarsRoverTestData.roverInstructions.get(0));
+        assertEquals(MarsRoverTestData.roverInstructions.get(0), userInterface.getRoverInstruction());
     }
 
     @Test
@@ -60,39 +62,36 @@ public class UserInterfaceTest {
     @Test
     public void testCollectRoverDataForSingleRover(){
         RoverDataBO marsRoverDataTestBO = marsRoverTestData.initialiseRoverDataBOObject(false);
-        systemInputMock.provideLines(MarsRoverTestData.plateauSize,
-                MarsRoverTestData.roverOnePosition,
-                MarsRoverTestData.roverOneInstruction,
-                MarsRoverTestData.userNo);
+        systemInputMock.provideLines(MarsRoverTestData.plateauSizeList.get(0),
+                MarsRoverTestData.roverPositions.get(0),
+                MarsRoverTestData.roverInstructions.get(0),
+                MarsRoverTestData.userYesNo.get(1));
         RoverDataBO roverDataBOFromMethod = userInterface.collectRoverData();
+        assertRoverDataBO(marsRoverDataTestBO, roverDataBOFromMethod);
+    }
+
+    private static void assertRoverDataBO(RoverDataBO marsRoverDataTestBO, RoverDataBO roverDataBOFromMethod) {
         assertEquals(marsRoverDataTestBO.getPlateauSize(),
                 roverDataBOFromMethod.getPlateauSize());
-        assertEquals(marsRoverDataTestBO.getRoverPositionsList().get(0),
+        for (int i = 0; i < roverDataBOFromMethod.getRoverPositionsList().size(); i++) {
+            assertEquals(marsRoverDataTestBO.getRoverPositionsList().get(0),
                     roverDataBOFromMethod.getRoverPositionsList().get(0));
-        assertEquals(marsRoverDataTestBO.getRoverInstructionsList().get(0),
+            assertEquals(marsRoverDataTestBO.getRoverInstructionsList().get(0),
                     roverDataBOFromMethod.getRoverInstructionsList().get(0));
+        }
     }
 
     @Test
     public void testCollectRoverDataForMultipleRovers(){
         RoverDataBO marsRoverDataTestBO = marsRoverTestData.initialiseRoverDataBOObject(true);
-        systemInputMock.provideLines(MarsRoverTestData.plateauSize,
-                MarsRoverTestData.roverOnePosition,
-                MarsRoverTestData.roverOneInstruction,
-                MarsRoverTestData.userYes,
-                MarsRoverTestData.roverTwoPosition,
-                MarsRoverTestData.roverTwoInstruction,
-                MarsRoverTestData.userNo);
+        systemInputMock.provideLines(MarsRoverTestData.plateauSizeList.get(0),
+                MarsRoverTestData.roverPositions.get(0),
+                MarsRoverTestData.roverInstructions.get(0),
+                MarsRoverTestData.userYesNo.get(0),
+                MarsRoverTestData.roverPositions.get(1),
+                MarsRoverTestData.roverInstructions.get(1),
+                MarsRoverTestData.userYesNo.get(1));
         RoverDataBO roverDataBOFromMethod = userInterface.collectRoverData();
-        assertEquals(marsRoverDataTestBO.getPlateauSize(),
-                roverDataBOFromMethod.getPlateauSize());
-        for (int i = 0; i < roverDataBOFromMethod.getRoverPositionsList().size(); i++) {
-            assertEquals(marsRoverDataTestBO.getRoverPositionsList().get(i),
-                    roverDataBOFromMethod.getRoverPositionsList().get(i));
-            assertEquals(marsRoverDataTestBO.getRoverInstructionsList().get(i),
-                    roverDataBOFromMethod.getRoverInstructionsList().get(i));
-        }
+        assertRoverDataBO(marsRoverDataTestBO, roverDataBOFromMethod);
     }
-
-
 }

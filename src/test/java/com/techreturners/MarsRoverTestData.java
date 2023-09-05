@@ -1,58 +1,69 @@
 package com.techreturners;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MarsRoverTestData {
+    public static ArrayList<String> plateauSizeList =
+            new ArrayList<String>(Arrays.asList("5 5","1 1","2 2"));
     public static String plateauSize = "5 5";
     public static String roverOnePosition = "1 2 N";
     public static String roverOneInstruction = "LMLMLMLMM";
 
     public static String roverTwoPosition = "3 3 E";
     public static String roverTwoInstruction = "MMRMMRMRRM";
-    public static String plateauSizeWithSpaces = "1  2";
     public static String userNo = "N";
     public static String userYes = "Y";
+    public static String plateauSizeWithSpaces = "1  2";
+
+    public static ArrayList<String> roverPositions =
+            new ArrayList<String>(Arrays.asList("1 2 N","3 3 E","0 0 N"));
+
+    public static ArrayList<String> roverInstructions =
+            new ArrayList<String>(Arrays.asList("LMLMLMLMM","MMRMMRMRRM","MM"));
+    public static ArrayList<Integer> xyValues =
+            new ArrayList<Integer>(Arrays.asList(5,5,1,2,3,3));
+    public static ArrayList<String> userYesNo =
+            new ArrayList<String>(Arrays.asList("Y","N"));
     public static int x = 5;
     public static int y = 5;
+
+    public static ArrayList<String> finalRoverPositions =
+            new ArrayList<String>(Arrays.asList("1 3 N","5 1 E"));
     public static String finalPositionRoverOne = "1 3 N";
-    public static String expectedOutputForMain = "1 3 N";
-
-    //public static String finalPositionRoverOne = "Enter the plateau maximum co-ordinates in format x y : Enter the current Rover position co-ordinates in format x y direction e.g. 1 2 N : Enter the instruction for rover movement(L,R or M): Do you have more Rovers? (Y/N): Rover 1 is now at new position 1 3 N\n";
     public static String finalPositionRoverTwo = "5 1 E";
-
-    public static Direction directionNorth = Direction.N;
-    public static Direction directionEast = Direction.E;
-
 
     public RoverDataBO initialiseRoverDataBOObject(boolean multipleFlag){
         ArrayList<String> roverPositionList = new ArrayList<String>();
         ArrayList<String> roverInstructionList = new ArrayList<String>();
-        roverPositionList.add(roverOnePosition);
-        roverInstructionList.add(roverOneInstruction);
+        roverPositionList.add(roverPositions.get(0));
+        roverInstructionList.add(roverInstructions.get(0));
         if (multipleFlag){
-            roverPositionList.add(roverTwoPosition);
-            roverInstructionList.add(roverTwoInstruction);
+            roverPositionList.add(roverPositions.get(1));
+            roverInstructionList.add(roverInstructions.get(1));
         }
-        return new RoverDataBO(plateauSize,
+        return new RoverDataBO(plateauSizeList.get(0),
                 roverPositionList, roverInstructionList);
     }
 
     public Plateau initialisePlateauObject(){
-        return new RectanglePlateau(x, y);
+        return new RectanglePlateau(xyValues.get(0),xyValues.get(1));
     }
 
     public Position initialisePositionObjectForRoverOne(){
-        return new Position(1, 2);
+        return new Position(xyValues.get(2), xyValues.get(3));
     }
 
     public Instruction initialiseInstructionForRoverOne(){
-        return new Instruction(roverOneInstruction);
+
+        return new Instruction(roverInstructions.get(0));
     }
     public Position initialisePositionObjectForRoverTwo(){
-        return new Position(3, 3);
+        return new Position(xyValues.get(4), xyValues.get(5));
     }
 
     public Instruction initialiseInstructionForRoverTwo(){
-        return new Instruction(roverTwoInstruction);
+
+        return new Instruction(roverInstructions.get(1));
     }
 }

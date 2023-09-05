@@ -14,7 +14,7 @@ public class RoverTest {
     public void setUp(){
         marsRoverTestData = new MarsRoverTestData();
         marsRover = new Rover(marsRoverTestData.initialisePositionObjectForRoverOne(),
-                MarsRoverTestData.directionNorth,marsRoverTestData.initialiseInstructionForRoverOne());
+                Direction.N,marsRoverTestData.initialiseInstructionForRoverOne());
         plateau = new RectanglePlateau(5, 5);
     }
 
@@ -23,7 +23,7 @@ public class RoverTest {
         assertEquals(MarsRoverTestData.finalPositionRoverOne,
                 marsRover.calculateNewCoordinates(plateau));
         marsRover = new Rover(marsRoverTestData.initialisePositionObjectForRoverTwo(),
-                MarsRoverTestData.directionEast,marsRoverTestData.initialiseInstructionForRoverTwo());
+                Direction.E,marsRoverTestData.initialiseInstructionForRoverTwo());
         assertEquals(MarsRoverTestData.finalPositionRoverTwo,
                 marsRover.calculateNewCoordinates(plateau));
     }
