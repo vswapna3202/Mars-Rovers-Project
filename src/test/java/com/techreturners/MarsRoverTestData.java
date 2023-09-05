@@ -24,8 +24,7 @@ public class MarsRoverTestData {
             roverPositionList.add(roverTwoPosition);
             roverInstructionList.add(roverTwoInstruction);
         }
-        RoverDataBO marsRoverDataBOTest = new RoverDataBO(plateauSize,
+        return new RoverDataBO(plateauSize,
                 roverPositionList, roverInstructionList);
-        return marsRoverDataBOTest;
     }
 }
