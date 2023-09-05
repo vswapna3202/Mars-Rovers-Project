@@ -3,26 +3,41 @@ package com.techreturners;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MarsRoverAppTest {
 
     MarsRoverApp marsRoverApp;
     MarsRoverTestData marsRoverTestData;
-    RoverDataBO roverDataTestBO;
+    RoverDataBO roverOneDataTestBO;
+    RoverDataBO roverTwoDataTestBO;
+    Plateau plateau;
 
     @Before
     public void setUp(){
         marsRoverTestData = new MarsRoverTestData();
-        roverDataTestBO = marsRoverTestData.initialiseRoverDataBOObject(false);
-        marsRoverApp = new MarsRoverApp(roverDataTestBO);
+        roverOneDataTestBO = marsRoverTestData.initialiseRoverDataBOObject(false);
+        roverTwoDataTestBO = marsRoverTestData.initialiseRoverDataBOObject(false);
+        marsRoverApp = new MarsRoverApp(roverOneDataTestBO);
+        plateau = marsRoverTestData.initialisePlateauObject();
     }
 
     @Test
     public void testAssignPlateauSize(){
         RectanglePlateau rectanglePlateau =
-                (RectanglePlateau) marsRoverApp.assignPlateauSize(roverDataTestBO);
+                (RectanglePlateau) marsRoverApp.assignPlateauSize(roverOneDataTestBO);
         assertEquals(MarsRoverTestData.x, rectanglePlateau.getMaxX());
         assertEquals(MarsRoverTestData.y, rectanglePlateau.getMaxY());
     }
+
+    @Test
+    public void testAssignRoverDataAndMoveRover(){
+        ArrayList<String> finalCoordinates =
+                marsRoverApp.assignRoverDataAndMoveRover(plateau);
+        assertEquals(MarsRoverTestData.finalPositionRoverOne,
+                finalCoordinates.get(0));
+    }
+
 }

@@ -15,6 +15,10 @@ public class MarsRoverTestData {
     public static int x = 5;
     public static int y = 5;
 
+    public static String finalPositionRoverOne = "1 3 N";
+    public static String finalPositionRoverTwo = "5 1 E";
+
+
     public RoverDataBO initialiseRoverDataBOObject(boolean multipleFlag){
         ArrayList<String> roverPositionList = new ArrayList<String>();
         ArrayList<String> roverInstructionList = new ArrayList<String>();
@@ -26,5 +30,9 @@ public class MarsRoverTestData {
         }
         return new RoverDataBO(plateauSize,
                 roverPositionList, roverInstructionList);
+    }
+
+    public Plateau initialisePlateauObject(){
+        return new RectanglePlateau(x, y);
     }
 }
