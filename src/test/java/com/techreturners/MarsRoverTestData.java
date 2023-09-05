@@ -14,8 +14,10 @@ public class MarsRoverTestData {
     public static String userYes = "Y";
     public static int x = 5;
     public static int y = 5;
-
     public static String finalPositionRoverOne = "1 3 N";
+    public static String expectedOutputForMain = "1 3 N";
+
+    //public static String finalPositionRoverOne = "Enter the plateau maximum co-ordinates in format x y : Enter the current Rover position co-ordinates in format x y direction e.g. 1 2 N : Enter the instruction for rover movement(L,R or M): Do you have more Rovers? (Y/N): Rover 1 is now at new position 1 3 N\n";
     public static String finalPositionRoverTwo = "5 1 E";
 
     public static Direction directionNorth = Direction.N;
