@@ -40,4 +40,12 @@ public class MarsRoverAppTest {
                 finalCoordinates.get(0));
     }
 
+    @Test
+    public void testProcessRoverData(){
+        ArrayList<String> finalCoordinates = marsRoverApp.processRoverData();
+        assertEquals(MarsRoverTestData.finalPositionRoverOne,
+                finalCoordinates.get(0));
+
+    }
+
 }

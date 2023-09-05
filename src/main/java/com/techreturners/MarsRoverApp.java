@@ -40,10 +40,23 @@ public class MarsRoverApp {
         return finalCoordinates;
     }
 
+    public ArrayList<String> processRoverData(){
+        Plateau plateau = assignPlateauSize(roverDataBO);
+        return assignRoverDataAndMoveRover(plateau);
+    }
+
+    private void displayRoverFinalCoordinates(ArrayList<String> finalCoordinates){
+        int index = 1;
+        for (String coordinate : finalCoordinates){
+            System.out.println("Rover "+index+" is now at new position "+coordinate);
+            index += 1;
+        }
+    }
+
     public static void main (String[] args){
         UserInterface userInterface = new UserInterface();
         RoverDataBO roverDataBO = userInterface.collectRoverData();
-        //MarsRoverApp marsRoverApp = new MarsRoverApp(roverDataBO);
-        //marsRoverApp.processRoverData();
+        MarsRoverApp marsRoverApp = new MarsRoverApp(roverDataBO);
+        marsRoverApp.displayRoverFinalCoordinates(marsRoverApp.processRoverData());
     }
 }

@@ -7,4 +7,8 @@ public class Instruction {
     public Instruction(String instruction) {
         this.instruction = instruction;
     }
+
+    public String getInstruction() {
+        return instruction;
+    }
 }

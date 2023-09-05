@@ -47,7 +47,7 @@ public class UserInterface {
         while(true){
             roverPositionList.add(getRoverPosition());
             roverInstructionList.add(getRoverInstruction());
-            System.out.println("Do you have more Rovers? (Y/N): ");
+            System.out.print("Do you have more Rovers? (Y/N): ");
             String inputStr = scanner.nextLine().trim().toUpperCase();
             if(!inputStr.equals("Y")){
                 break;
