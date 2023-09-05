@@ -33,5 +33,17 @@ public class UserInterfaceTest {
         assertEquals(marsRoverTestData.plateauSizeWithSpaces, userInterface.getPlateauSize());
     }
 
+    @Test
+    public void testGetRoverPositionValidData() {
+        systemInputMock.provideLines(marsRoverTestData.roverPosition);
+        assertEquals(marsRoverTestData.roverPosition, userInterface.getRoverPosition());
+    }
+
+    @Test
+    public void testGetRoverPositionInValidData() {
+        systemInputMock.provideLines(null,"","1, 2 N","A B 2","MME","£$%","1 3 A","1 2  s");
+        assertEquals("1 2  S", userInterface.getRoverPosition());
+    }
+
 
 }

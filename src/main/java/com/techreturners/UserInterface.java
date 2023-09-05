@@ -9,21 +9,27 @@ public class UserInterface {
     }
 
     public String getPlateauSize(){
+        String pattern = "\\d\\s*\\d\\s*";
+        String prompt = "Enter the plateau maximum co-ordinates in format x y : ";
+        return getInput(prompt, pattern);
 
+    }
+
+    public String getRoverPosition(){
+        String pattern = "\\d+\\s+\\d+\\s+[NSEWnsew]";
+        String prompt = "Enter the current Rover position co-ordinates in"
+                +" format x y direction e.g. 1 2 N : ";
+        return getInput(prompt, pattern);
+    }
+
+    private String getInput(String prompt, String pattern){
         boolean isValid = false;
         String inputString = "";
         while(!isValid) {
-            System.out.print("Enter the plateau coordinates in format x y : ");
-            String pattern = "\\d\\s*\\d\\s*";
+            System.out.print(prompt);
             inputString = scanner.nextLine().trim().toUpperCase();
             isValid = inputString.matches(pattern);
         }
         return inputString;
-    }
-
-    public static void main(String[] args){
-        UserInterface userInterface = new UserInterface();
-        System.out.println(userInterface.getPlateauSize());
-
     }
 }
