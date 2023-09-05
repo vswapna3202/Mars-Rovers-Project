@@ -9,6 +9,10 @@ public class UserInterface {
         scanner = new Scanner(System.in);
     }
 
+    public Scanner getScanner() {
+        return scanner;
+    }
+
     public String getPlateauSize(){
         String pattern = "\\d\\s*\\d\\s*";
         String prompt = "Enter the plateau maximum co-ordinates in format x y : ";
@@ -55,7 +59,6 @@ public class UserInterface {
         }
         RoverDataBO roverDataBO = new RoverDataBO(plateauSize,
                 roverPositionList, roverInstructionList);
-        scanner.close();
         return roverDataBO;
     }
 }

@@ -33,7 +33,7 @@ public class MarsRoverAppTest {
     }
 
     @Test
-    public void testAssignRoverDataAndMoveRover(){
+    public void testAssignRoverDataAndMoveRover() throws CustomRoverException{
         ArrayList<String> finalCoordinates =
                 marsRoverApp.assignRoverDataAndMoveRover(plateau);
         assertEquals(MarsRoverTestData.finalPositionRoverOne,
@@ -41,7 +41,7 @@ public class MarsRoverAppTest {
     }
 
     @Test
-    public void testProcessRoverData(){
+    public void testProcessRoverData() throws CustomRoverException{
         ArrayList<String> finalCoordinates = marsRoverApp.processRoverData();
         assertEquals(MarsRoverTestData.finalPositionRoverOne,
                 finalCoordinates.get(0));

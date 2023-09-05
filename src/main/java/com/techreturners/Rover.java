@@ -46,7 +46,7 @@ public class Rover extends SpaceVehicles {
         }
     }
 
-    protected void moveForward(Plateau plateau){
+    protected void moveForward(Plateau plateau) throws CustomRoverException {
         int currentXCoordinate = position.getxCoordinate();
         int currentYCoordinate = position.getyCoordinate();
         switch(direction){
@@ -63,12 +63,18 @@ public class Rover extends SpaceVehicles {
                 currentYCoordinate--;
                 break;
         }
+        ObstacleDetector obstacleDetector = new ObstacleDetector();
+        if(!plateau.isWithinBounds(currentXCoordinate, currentYCoordinate))
+            throw new CustomRoverException("Rover will cross the plateau boundary specified with current instructions. ");
+        if (obstacleDetector.detectsObstacle(currentXCoordinate, currentXCoordinate)){
+            throw new CustomRoverException("Rover will collide with an obstacle with current instructions.");
+        }
         position.setxCoordinate(currentXCoordinate);
         position.setyCoordinate(currentYCoordinate);
     }
 
 
-    public String calculateNewCoordinates(Plateau plateau){
+    public String calculateNewCoordinates(Plateau plateau) throws CustomRoverException{
         for(char instructionChar : instruction.getInstruction().toCharArray()){
             switch(instructionChar){
                 case 'L':

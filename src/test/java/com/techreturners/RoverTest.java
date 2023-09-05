@@ -19,7 +19,7 @@ public class RoverTest {
     }
 
     @Test
-    public void testCalculateNewCoordinates(){
+    public void testCalculateNewCoordinates() throws CustomRoverException{
         assertEquals(MarsRoverTestData.finalPositionRoverOne,
                 marsRover.calculateNewCoordinates(plateau));
         marsRover = new Rover(marsRoverTestData.initialisePositionObjectForRoverTwo(),

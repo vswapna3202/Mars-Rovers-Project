@@ -17,7 +17,8 @@ public class MarsRoverApp {
         return new RectanglePlateau(xCoordinate, yCoordinate);
     }
 
-    public ArrayList<String> assignRoverDataAndMoveRover(Plateau plateau){
+    public ArrayList<String> assignRoverDataAndMoveRover(Plateau plateau)
+            throws CustomRoverException{
         ArrayList<String> finalCoordinates = new ArrayList<String>();
         ArrayList<String> roverPositionsList = roverDataBO.getRoverPositionsList();
         ArrayList<String> roverInstructionList = roverDataBO.getRoverInstructionsList();
@@ -40,9 +41,10 @@ public class MarsRoverApp {
         return finalCoordinates;
     }
 
-    public ArrayList<String> processRoverData(){
+    public ArrayList<String> processRoverData() throws CustomRoverException{
         Plateau plateau = assignPlateauSize(roverDataBO);
         return assignRoverDataAndMoveRover(plateau);
+
     }
 
     private void displayRoverFinalCoordinates(ArrayList<String> finalCoordinates){
@@ -54,9 +56,20 @@ public class MarsRoverApp {
     }
 
     public static void main (String[] args){
-        UserInterface userInterface = new UserInterface();
-        RoverDataBO roverDataBO = userInterface.collectRoverData();
-        MarsRoverApp marsRoverApp = new MarsRoverApp(roverDataBO);
-        marsRoverApp.displayRoverFinalCoordinates(marsRoverApp.processRoverData());
+        boolean isValidScenario = false;
+        UserInterface userInterface = null;
+        while(!isValidScenario) {
+            try {
+                userInterface = new UserInterface();
+                RoverDataBO roverDataBO = userInterface.collectRoverData();
+                MarsRoverApp marsRoverApp = new MarsRoverApp(roverDataBO);
+
+                marsRoverApp.displayRoverFinalCoordinates(marsRoverApp.processRoverData());
+                isValidScenario = true;
+                userInterface.getScanner().close();
+            } catch (CustomRoverException cre) {
+                System.out.println(" Please Re-enter Rover data!" + cre.getMessage());
+            }
+        }
     }
 }
