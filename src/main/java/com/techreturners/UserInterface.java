@@ -1,9 +1,10 @@
 package com.techreturners;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserInterface {
-    private Scanner scanner;
+    private final Scanner scanner;
     public UserInterface(){
         scanner = new Scanner(System.in);
     }
@@ -37,5 +38,24 @@ public class UserInterface {
             isValid = inputString.matches(pattern);
         }
         return inputString;
+    }
+
+    public RoverDataBO collectRoverData(){
+        String plateauSize = getPlateauSize();
+        ArrayList<String> roverPositionList = new ArrayList<String>();
+        ArrayList<String> roverInstructionList = new ArrayList<String>();
+        while(true){
+            roverPositionList.add(getRoverPosition());
+            roverInstructionList.add(getRoverInstruction());
+            System.out.println("Do you have more Rovers? (Y/N): ");
+            String inputStr = scanner.nextLine().trim().toUpperCase();
+            if(!inputStr.equals("Y")){
+                break;
+            }
+        }
+        RoverDataBO roverDataBO = new RoverDataBO(plateauSize,
+                roverPositionList, roverInstructionList);
+        scanner.close();
+        return roverDataBO;
     }
 }
