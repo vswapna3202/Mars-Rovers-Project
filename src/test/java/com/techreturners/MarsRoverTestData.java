@@ -18,7 +18,8 @@ public class MarsRoverTestData {
     public static String finalPositionRoverOne = "1 3 N";
     public static String finalPositionRoverTwo = "5 1 E";
 
-    public static Direction direction = Direction.N;
+    public static Direction directionNorth = Direction.N;
+    public static Direction directionEast = Direction.E;
 
 
     public RoverDataBO initialiseRoverDataBOObject(boolean multipleFlag){
@@ -38,11 +39,18 @@ public class MarsRoverTestData {
         return new RectanglePlateau(x, y);
     }
 
-    public Position initialisePositionObject(){
+    public Position initialisePositionObjectForRoverOne(){
         return new Position(1, 2);
     }
 
-    public Instruction initialiseInstruction(){
+    public Instruction initialiseInstructionForRoverOne(){
         return new Instruction(roverOneInstruction);
+    }
+    public Position initialisePositionObjectForRoverTwo(){
+        return new Position(3, 3);
+    }
+
+    public Instruction initialiseInstructionForRoverTwo(){
+        return new Instruction(roverTwoInstruction);
     }
 }
