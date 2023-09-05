@@ -27,5 +27,11 @@ public class UserInterfaceTest {
         assertEquals(marsRoverTestData.plateauSize, userInterface.getPlateauSize());
     }
 
+    @Test
+    public void testGetPlateauSizeInValidData(){
+        systemInputMock.provideLines(null,"","5, 5","A B","% $","1  2  ");
+        assertEquals(marsRoverTestData.plateauSizeWithSpaces, userInterface.getPlateauSize());
+    }
+
 
 }
