@@ -10,10 +10,10 @@ public class MarsRoverTestData {
     public static String roverTwoPosition = "3 3 E";
     public static String roverTwoInstruction = "MMRMMRMRRM";
     public static String plateauSizeWithSpaces = "1  2";
-    public RoverDataBO marsRoverDataBOTest;
-
     public static String userNo = "N";
     public static String userYes = "Y";
+    public static int x = 5;
+    public static int y = 5;
 
     public RoverDataBO initialiseRoverDataBOObject(boolean multipleFlag){
         ArrayList<String> roverPositionList = new ArrayList<String>();
