@@ -22,6 +22,12 @@ public class UserInterface {
         return getInput(prompt, pattern);
     }
 
+    public String getRoverInstruction(){
+        String pattern = "^[LRMlrm]+$";
+        String prompt = "Enter the instruction for rover movement(L,R or M): ";
+        return getInput(prompt, pattern);
+    }
+
     private String getInput(String prompt, String pattern){
         boolean isValid = false;
         String inputString = "";

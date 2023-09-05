@@ -28,7 +28,7 @@ public class UserInterfaceTest {
     }
 
     @Test
-    public void testGetPlateauSizeInValidData(){
+    public void testGetPlateauSizeInvalidData(){
         systemInputMock.provideLines(null,"","5, 5","A B","% $","1  2  ");
         assertEquals(marsRoverTestData.plateauSizeWithSpaces, userInterface.getPlateauSize());
     }
@@ -40,9 +40,21 @@ public class UserInterfaceTest {
     }
 
     @Test
-    public void testGetRoverPositionInValidData() {
+    public void testGetRoverPositionInvalidData() {
         systemInputMock.provideLines(null,"","1, 2 N","A B 2","MME","£$%","1 3 A","1 2  s");
         assertEquals("1 2  S", userInterface.getRoverPosition());
+    }
+
+    @Test
+    public void testGetRoverInstructionValidData() {
+        systemInputMock.provideLines(marsRoverTestData.roverInstruction);
+        assertEquals(marsRoverTestData.roverInstruction, userInterface.getRoverInstruction());
+    }
+
+    @Test
+    public void testGetRoverInstructionInvalidData() {
+        systemInputMock.provideLines(null,"","ABABABCCC","121212333","%$%$%$£££","L M L M  M ","lml");
+        assertEquals("LML", userInterface.getRoverInstruction());
     }
 
 
