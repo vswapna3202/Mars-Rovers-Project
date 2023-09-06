@@ -23,19 +23,23 @@ public class UserInterfaceTest {
 
     @Test
     public void testGetPlateauSizeValidData(){
+        // Simulating userInput and values are for valid Plateau size
         systemInputMock.provideLines(MarsRoverTestData.plateauSizeList.get(0));
         assertEquals(MarsRoverTestData.plateauSizeList.get(0),
                 userInterface.getPlateauSize());
     }
 
+
     @Test
     public void testGetPlateauSizeInvalidData(){
-        systemInputMock.provideLines(null,"","5, 5","A B","% $","1  2  ");
+        // Simulating userInput and all invalid values for Plateau size are tested
+        systemInputMock.provideLines(null,"5, 5","A B","% $","","1  2  ");
         assertEquals("1  2", userInterface.getPlateauSize());
     }
 
     @Test
     public void testGetRoverPositionValidData() {
+        // Simulating userInput and valid value for Rover Position is tested
         systemInputMock.provideLines(MarsRoverTestData.roverPositions.get(0));
         assertEquals(MarsRoverTestData.roverPositions.get(0),
                 userInterface.getRoverPosition());
@@ -43,24 +47,29 @@ public class UserInterfaceTest {
 
     @Test
     public void testGetRoverPositionInvalidData() {
-        systemInputMock.provideLines(null,"","1, 2 N","A B 2","MME","£$%","1 3 A","1 2  s");
+        // Simulating userInput and all invalid values for Rover Position are tested
+        systemInputMock.provideLines(null,"","1, 2 N","A B 2","MME","£$%","1 3 A","1","1 2  s");
         assertEquals("1 2  S", userInterface.getRoverPosition());
     }
 
     @Test
     public void testGetRoverInstructionValidData() {
+        // Simulating userInput and valid value for Rover Instruction is tested
         systemInputMock.provideLines(MarsRoverTestData.roverInstructions.get(0));
         assertEquals(MarsRoverTestData.roverInstructions.get(0), userInterface.getRoverInstruction());
     }
 
     @Test
     public void testGetRoverInstructionInvalidData() {
+        // Simulating userInput and all invalid values for Rover Instructions are tested
         systemInputMock.provideLines(null,"","ABABABCCC","121212333","%$%$%$£££","L M L M  M ","lml");
         assertEquals("LML", userInterface.getRoverInstruction());
     }
 
     @Test
-    public void testCollectRoverDataForSingleRover(){
+    public void testCollectRoverDataForValidSingleRover(){
+        // Simulating userInput and all invalid values for collectRoverData with
+        // user inputting a single Rover valid data is tested
         RoverDataBO marsRoverDataTestBO = marsRoverTestData.initialiseRoverDataBOObject(false);
         systemInputMock.provideLines(MarsRoverTestData.plateauSizeList.get(0),
                 MarsRoverTestData.roverPositions.get(0),
@@ -70,7 +79,13 @@ public class UserInterfaceTest {
         assertRoverDataBO(marsRoverDataTestBO, roverDataBOFromMethod);
     }
 
+    /*  This method asserts Plateau Size, rover position and rover instruction
+        populated in roverDataBO object by collectRoverData method. In case of
+        multiple rover data all positions and instructions are checked if populated
+        in BO object
+     */
     private static void assertRoverDataBO(RoverDataBO marsRoverDataTestBO, RoverDataBO roverDataBOFromMethod) {
+
         assertEquals(marsRoverDataTestBO.getPlateauSize(),
                 roverDataBOFromMethod.getPlateauSize());
         for (int i = 0; i < roverDataBOFromMethod.getRoverPositionsList().size(); i++) {
@@ -83,6 +98,8 @@ public class UserInterfaceTest {
 
     @Test
     public void testCollectRoverDataForMultipleRovers(){
+        // Simulating userInput and all invalid values for collectRoverData with
+        // user inputting valid data for multiple rovers
         RoverDataBO marsRoverDataTestBO = marsRoverTestData.initialiseRoverDataBOObject(true);
         systemInputMock.provideLines(MarsRoverTestData.plateauSizeList.get(0),
                 MarsRoverTestData.roverPositions.get(0),
