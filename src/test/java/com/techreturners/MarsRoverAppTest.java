@@ -63,6 +63,17 @@ public class MarsRoverAppTest {
         assertFinalCoordinates(finalCoordinates);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testAssignRoverDataAndMoveRoverCheckInvalidInput()
+            throws CustomRoverException{
+        roverOneDataTestBO = marsRoverTestData.initialiseRoverDataForInvalidInput();
+        marsRoverApp = new MarsRoverApp(roverOneDataTestBO);
+
+        marsRoverApp.assignRoverDataAndMoveRover(
+                new RectanglePlateau(MarsRoverTestData.xyValues.get(10),
+                        MarsRoverTestData.xyValues.get(11)));
+    }
+
     @Test(expected = CustomRoverException.class)
     public void testAssignRoverDataAndMoveRoverCheckExceptionInvalidBoundary()
             throws CustomRoverException{

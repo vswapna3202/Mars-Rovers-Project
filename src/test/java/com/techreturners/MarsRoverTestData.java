@@ -7,7 +7,7 @@ public class MarsRoverTestData {
     public static ArrayList<String> plateauSizeList =
             new ArrayList<>(Arrays.asList("5 5","1 1","2 2"));
     public static ArrayList<String> roverPositions =
-            new ArrayList<>(Arrays.asList("1 2 N", "3 3 E", "0 0 N", "2 2 S", "3 2 W"));
+            new ArrayList<>(Arrays.asList("1 2 N", "3 3 E", "0 0 N", "2 2 S", "3 2 W","3 3 3 N"));
     public static ArrayList<String> roverInstructions =
             new ArrayList<>(Arrays.asList("LMLMLMLMM","MMRMMRMRRM","MM","LR","RM","LML","RMM"));
     public static ArrayList<Integer> xyValues =
@@ -43,6 +43,16 @@ public class MarsRoverTestData {
         return new RectanglePlateau(xyValues.get(0),xyValues.get(1));
     }
 
+    public RoverDataBO initialiseRoverDataForInvalidInput(){
+        ArrayList<String> positionList = new ArrayList<>();
+        ArrayList<String> instructionList = new ArrayList<>();
+        positionList.add(roverPositions.get(5));
+        instructionList.add(roverInstructions.get(2));
+        return new RoverDataBO(
+                plateauSizeList.get(0),
+                positionList,
+                instructionList);
+    }
     public RoverDataBO initialiseRoverDataForBoundary(){
         ArrayList<String> positionList = new ArrayList<>();
         ArrayList<String> instructionList = new ArrayList<>();
