@@ -44,7 +44,7 @@ public class RoverTest {
                 Direction.S, new Instruction(MarsRoverTestData.roverInstructions.get(3)));
         assertEquals(MarsRoverTestData.finalRoverPositions.get(2),
                 marsRover.calculateNewCoordinates(plateau));
-        /* Testing for valid rover data within bounday and no obstacle in
+        /* Testing for valid rover data within boundary and no obstacle in
            direction W and movements forward and right
          */
         marsRover = new Rover(new Position(MarsRoverTestData.xyValues.get(8),

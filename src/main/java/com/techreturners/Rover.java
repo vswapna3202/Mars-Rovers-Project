@@ -1,6 +1,6 @@
 package com.techreturners;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Rover extends SpaceVehicles {
     Position position;
@@ -14,34 +14,30 @@ public class Rover extends SpaceVehicles {
 
     protected void rotateLeft(){
         int numDirections = Direction.values().length;
-        int currentIndex = direction.ordinal();
-        int newIndex = (currentIndex + numDirections - 1) % numDirections;
-        direction = Direction.values()[newIndex];
+        direction = Arrays.stream(Direction.values())
+                .filter(d -> d.ordinal() == (direction.ordinal()
+                        + numDirections - 1) % numDirections)
+                .findFirst()
+                .get();
     }
 
     protected void rotateRight(){
         int numDirections = Direction.values().length;
-        int currentIndex = direction.ordinal();
-        int newIndex = (currentIndex + numDirections + 1) % numDirections;
-        direction = Direction.values()[newIndex];
+        direction = Arrays.stream(Direction.values())
+                .filter(d -> d.ordinal() == (direction.ordinal()
+                        + numDirections + 1) % numDirections)
+                .findFirst()
+                .get();
     }
 
     protected void moveForward(Plateau plateau) throws CustomRoverException {
         int currentXCoordinate = position.getxCoordinate();
         int currentYCoordinate = position.getyCoordinate();
-        switch(direction){
-            case N:
-                currentYCoordinate++;
-                break;
-            case W:
-                currentXCoordinate--;
-                break;
-            case E:
-                currentXCoordinate++;
-                break;
-            case S:
-                currentYCoordinate--;
-                break;
+        switch (direction) {
+            case N -> currentYCoordinate++;
+            case W -> currentXCoordinate--;
+            case E -> currentXCoordinate++;
+            case S -> currentYCoordinate--;
         }
         ObstacleDetector obstacleDetector = new ObstacleDetector();
         if(!plateau.isWithinBounds(currentXCoordinate, currentYCoordinate))
@@ -56,22 +52,13 @@ public class Rover extends SpaceVehicles {
 
     public String calculateNewCoordinates(Plateau plateau) throws CustomRoverException{
         for(char instructionChar : instruction.getInstruction().toCharArray()){
-            switch(instructionChar){
-                case 'L':
-                    rotateLeft();
-                    break;
-                case 'R':
-                    rotateRight();
-                    break;
-                case 'M':
-                    moveForward(plateau);
-                    break;
-                default:
-                    throw new IllegalArgumentException("Invalid instruction!");
+            switch (instructionChar) {
+                case 'L' -> rotateLeft();
+                case 'R' -> rotateRight();
+                case 'M' -> moveForward(plateau);
+                default -> throw new IllegalArgumentException("Invalid instruction!");
             }
         }
-        String newCoordinates = position.getxCoordinate()+" "+
-                position.getyCoordinate()+" "+direction;
-        return newCoordinates;
+        return position.getxCoordinate()+" "+position.getyCoordinate()+" "+direction;
     }
 }
