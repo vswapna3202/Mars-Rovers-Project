@@ -20,20 +20,10 @@ public class Rover extends SpaceVehicles {
     }
 
     protected void rotateRight(){
-        switch(direction){
-            case N:
-                direction = Direction.E;
-                break;
-            case E:
-                direction = Direction.S;
-                break;
-            case S:
-                direction = Direction.W;
-                break;
-            case W:
-                direction = Direction.N;
-                break;
-        }
+        int numDirections = Direction.values().length;
+        int currentIndex = direction.ordinal();
+        int newIndex = (currentIndex + numDirections + 1) % numDirections;
+        direction = Direction.values()[newIndex];
     }
 
     protected void moveForward(Plateau plateau) throws CustomRoverException {
