@@ -7,10 +7,10 @@ public class ObstacleDetector {
     private ArrayList<Position> obstaclePositions;
     private static final String OBSTACLE_FILE_NAME = "obstacles.txt";
     public ObstacleDetector(){
-        this.obstaclePositions = readObstaclePositionsFromFile();
+        //this.obstaclePositions = readObstaclePositionsFromFile();
     }
 
-    private ArrayList<Position> readObstaclePositionsFromFile(){
+    public ArrayList<Position> readObstaclePositionsFromFile(){
         ArrayList<Position> obstaclePositions = new ArrayList<>();
 
         try {

@@ -30,7 +30,9 @@ public class Rover extends SpaceVehicles {
                 .ifPresent(newDirection -> direction = newDirection);
     }
 
-    protected void moveForward(Plateau plateau) throws CustomRoverException {
+    protected void moveForward(Plateau plateau,
+                               ObstacleDetector obstacleDetector)
+            throws CustomRoverException {
         int currentXCoordinate = position.getxCoordinate();
         int currentYCoordinate = position.getyCoordinate();
         switch (direction) {
@@ -39,7 +41,7 @@ public class Rover extends SpaceVehicles {
             case E -> currentXCoordinate++;
             case S -> currentYCoordinate--;
         }
-        ObstacleDetector obstacleDetector = new ObstacleDetector();
+        //ObstacleDetector obstacleDetector = new ObstacleDetector();
         if(!plateau.isWithinBounds(currentXCoordinate, currentYCoordinate))
             throw new CustomRoverException("Rover will cross the plateau boundary specified with current instructions. ");
         if (obstacleDetector.detectsObstacle(currentXCoordinate, currentYCoordinate)){
@@ -51,11 +53,13 @@ public class Rover extends SpaceVehicles {
 
 
     public String calculateNewCoordinates(Plateau plateau) throws CustomRoverException{
+        ObstacleDetector obstacleDetector = new ObstacleDetector();
+        obstacleDetector.readObstaclePositionsFromFile();
         for(char instructionChar : instruction.getInstruction().toCharArray()){
             switch (instructionChar) {
                 case 'L' -> rotateLeft();
                 case 'R' -> rotateRight();
-                case 'M' -> moveForward(plateau);
+                case 'M' -> moveForward(plateau, obstacleDetector);
                 default -> throw new IllegalArgumentException("Invalid instruction!");
             }
         }

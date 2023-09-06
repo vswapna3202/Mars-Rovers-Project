@@ -7,5 +7,7 @@ public abstract class SpaceVehicles {
     protected String batteryLevel;
     protected abstract void rotateLeft();
     protected abstract void rotateRight();
-    protected abstract void moveForward(Plateau plateau) throws CustomRoverException;
+    protected abstract void moveForward(Plateau plateau,
+                                        ObstacleDetector obstacleDetector)
+            throws CustomRoverException;
 }
