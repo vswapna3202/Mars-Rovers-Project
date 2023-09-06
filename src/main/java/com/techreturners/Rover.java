@@ -13,20 +13,10 @@ public class Rover extends SpaceVehicles {
     }
 
     protected void rotateLeft(){
-        switch(direction){
-            case N:
-                direction = Direction.W;
-                break;
-            case W:
-                direction = Direction.S;
-                break;
-            case S:
-                direction = Direction.E;
-                break;
-            case E:
-                direction = Direction.N;
-                break;
-        }
+        int numDirections = Direction.values().length;
+        int currentIndex = direction.ordinal();
+        int newIndex = (currentIndex + numDirections - 1) % numDirections;
+        direction = Direction.values()[newIndex];
     }
 
     protected void rotateRight(){
