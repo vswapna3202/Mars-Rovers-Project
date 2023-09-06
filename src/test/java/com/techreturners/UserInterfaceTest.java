@@ -33,8 +33,12 @@ public class UserInterfaceTest {
     @Test
     public void testGetPlateauSizeInvalidData(){
         // Simulating userInput and all invalid values for Plateau size are tested
-        systemInputMock.provideLines(null,"5, 5","A B","% $","","1  2  ");
+        systemInputMock.provideLines(MarsRoverTestData.plateauInvalidData);
         assertEquals("1  2", userInterface.getPlateauSize());
+        // Simulating userInput and null value for Plateau size is tested
+        systemInputMock.provideLines(null,MarsRoverTestData.plateauSizeList.get(0));
+        assertEquals(MarsRoverTestData.plateauSizeList.get(0),
+                userInterface.getPlateauSize());
     }
 
     @Test
@@ -48,8 +52,13 @@ public class UserInterfaceTest {
     @Test
     public void testGetRoverPositionInvalidData() {
         // Simulating userInput and all invalid values for Rover Position are tested
-        systemInputMock.provideLines(null,"","1, 2 N","A B 2","MME","£$%","1 3 A","1","1 2  s");
-        assertEquals("1 2  S", userInterface.getRoverPosition());
+        systemInputMock.provideLines(MarsRoverTestData.roverPositionsInvalidData);
+        assertEquals(MarsRoverTestData.roverPositions.get(0),
+                userInterface.getRoverPosition());
+        //Null value for rover position is tested
+        systemInputMock.provideLines(null, MarsRoverTestData.roverPositions.get(0));
+        assertEquals(MarsRoverTestData.roverPositions.get(0),
+                userInterface.getRoverPosition());
     }
 
     @Test
@@ -62,8 +71,14 @@ public class UserInterfaceTest {
     @Test
     public void testGetRoverInstructionInvalidData() {
         // Simulating userInput and all invalid values for Rover Instructions are tested
-        systemInputMock.provideLines(null,"","ABABABCCC","121212333","%$%$%$£££","L M L M  M ","lml");
-        assertEquals("LML", userInterface.getRoverInstruction());
+        systemInputMock.provideLines(MarsRoverTestData.roverInstructionsInvalidData);
+        assertEquals(MarsRoverTestData.roverInstructions.get(5),
+                userInterface.getRoverInstruction());
+        // Null value for roverInstruction is tested
+        systemInputMock.provideLines(null,
+                MarsRoverTestData.roverInstructions.get(0));
+        assertEquals(MarsRoverTestData.roverInstructions.get(0),
+                userInterface.getRoverInstruction());
     }
 
     @Test

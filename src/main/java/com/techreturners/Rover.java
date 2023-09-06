@@ -66,7 +66,7 @@ public class Rover extends SpaceVehicles {
         ObstacleDetector obstacleDetector = new ObstacleDetector();
         if(!plateau.isWithinBounds(currentXCoordinate, currentYCoordinate))
             throw new CustomRoverException("Rover will cross the plateau boundary specified with current instructions. ");
-        if (obstacleDetector.detectsObstacle(currentXCoordinate, currentXCoordinate)){
+        if (obstacleDetector.detectsObstacle(currentXCoordinate, currentYCoordinate)){
             throw new CustomRoverException("Rover will collide with an obstacle with current instructions.");
         }
         position.setxCoordinate(currentXCoordinate);

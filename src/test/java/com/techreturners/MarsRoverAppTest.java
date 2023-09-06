@@ -1,10 +1,10 @@
 package com.techreturners;
 
+import org.junit.After;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -21,7 +21,6 @@ public class MarsRoverAppTest {
     RoverDataBO roverTwoDataTestBO;
     Plateau plateau;
     ByteArrayOutputStream outputStream;
-    PrintStream printStream;
     PrintStream originalOut;
 
     @Before
@@ -33,9 +32,11 @@ public class MarsRoverAppTest {
         marsRoverApp = new MarsRoverApp(roverOneDataTestBO);
     }
 
-    @Rule
-    public ExpectedException exception =
-            ExpectedException.none();
+    @After
+    public void tearDown() {
+        // Restore the original System.out after the test is complete
+        System.setOut(originalOut);
+    }
 
     @Test
     public void testAssignPlateauSizeValid(){
@@ -62,6 +63,28 @@ public class MarsRoverAppTest {
         assertFinalCoordinates(finalCoordinates);
     }
 
+    @Test(expected = CustomRoverException.class)
+    public void testAssignRoverDataAndMoveRoverCheckExceptionInvalidBoundary()
+            throws CustomRoverException{
+        roverOneDataTestBO = marsRoverTestData.initialiseRoverDataForBoundary();
+        marsRoverApp = new MarsRoverApp(roverOneDataTestBO);
+
+        marsRoverApp.assignRoverDataAndMoveRover(
+                new RectanglePlateau(MarsRoverTestData.xyValues.get(10),
+                MarsRoverTestData.xyValues.get(11)));
+    }
+
+    @Test(expected = CustomRoverException.class)
+    public void testAssignRoverDataAndMoveRoverCheckExceptionObstacleDetected()
+            throws CustomRoverException{
+        roverOneDataTestBO = marsRoverTestData.initialiseRoverDataForObstacleDetection();
+        marsRoverApp = new MarsRoverApp(roverOneDataTestBO);
+
+        marsRoverApp.assignRoverDataAndMoveRover(
+                new RectanglePlateau(MarsRoverTestData.xyValues.get(0),
+                        MarsRoverTestData.xyValues.get(1)));
+    }
+
     private static void assertFinalCoordinates(
             ArrayList<String> finalCoordinates) {
         for (int i=0; i < finalCoordinates.size(); i++) {
@@ -77,6 +100,23 @@ public class MarsRoverAppTest {
         assertFinalCoordinates(finalCoordinates);
     }
 
+    @Test(expected = CustomRoverException.class )
+    public void testProcessRoverDataRoverCheckExceptionThrownIfBoundaryCrossed()
+            throws CustomRoverException{
+        roverOneDataTestBO = marsRoverTestData.initialiseRoverDataForBoundary();
+        marsRoverApp = new MarsRoverApp(roverOneDataTestBO);
+        marsRoverApp.processRoverData();
+    }
+
+    @Test(expected = CustomRoverException.class )
+    public void testProcessRoverDataRoverCheckExceptionThrownIfObstacleDetected()
+            throws CustomRoverException{
+        roverOneDataTestBO =
+                marsRoverTestData.initialiseRoverDataForObstacleDetection();
+        marsRoverApp = new MarsRoverApp(roverOneDataTestBO);
+        marsRoverApp.processRoverData();
+    }
+
     @Test
     public void testProcessRoverDataMultiRovers() throws CustomRoverException{
         marsRoverApp = new MarsRoverApp(roverTwoDataTestBO);
@@ -88,23 +128,20 @@ public class MarsRoverAppTest {
     public void testMainValidData(){
         originalOut = System.out;
         outputStream = new ByteArrayOutputStream();
-        printStream = new PrintStream(outputStream);
-        System.setOut(printStream);
+        System.setOut(new PrintStream(outputStream));
+        //Simulating input for testing main method
+        String simulatedInput = String.join("\n",
+                MarsRoverTestData.plateauSizeList.get(0),
+                MarsRoverTestData.roverPositions.get(0),
+                MarsRoverTestData.roverInstructions.get(0),
+                MarsRoverTestData.userYesNo.get(1));
 
-        String simulatedInput = MarsRoverTestData.plateauSizeList.get(0)+"\n"
-                +MarsRoverTestData.roverPositions.get(0)+"\n"
-                +MarsRoverTestData.roverInstructions.get(0)+"\n"
-                +MarsRoverTestData.userYesNo.get(1)+"\n";
-
-        System.setIn(new java.io.ByteArrayInputStream(simulatedInput.getBytes()));
-
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
         MarsRoverApp.main(new String[0]);
         String consoleOutput = outputStream.toString();
 
-        Pattern pattern = Pattern.compile("Rover 1 is now at new position (.+)");
-
+        Pattern pattern = Pattern.compile(MarsRoverTestData.mainMethodOutputPattern);
         Matcher matcher = pattern.matcher(consoleOutput);
-
         assertTrue(matcher.find());
         String actualOutput = matcher.group(1);
 
