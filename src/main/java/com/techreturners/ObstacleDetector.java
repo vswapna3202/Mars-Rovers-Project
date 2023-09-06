@@ -5,29 +5,30 @@ import java.util.ArrayList;
 
 public class ObstacleDetector {
     private ArrayList<Position> obstaclePositions;
-    private static final String obstacleFileName = "obstacles.txt";
+    private static final String OBSTACLE_FILE_NAME = "obstacles.txt";
     public ObstacleDetector(){
-        this.obstaclePositions = readObstaclePositionsFromFile(obstacleFileName);
+        this.obstaclePositions = readObstaclePositionsFromFile();
     }
 
-    private ArrayList<Position> readObstaclePositionsFromFile(String obstacleFilePath){
+    private ArrayList<Position> readObstaclePositionsFromFile(){
         ArrayList<Position> obstaclePositions = new ArrayList<>();
+
         try {
-            InputStream inputStream = getClass().getClassLoader().getResourceAsStream(obstacleFileName);
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream(OBSTACLE_FILE_NAME);
             if (inputStream != null) {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                 String line;
                 while ((line = reader.readLine()) != null) {
                     Position position = parseObstaclePosition(line);
-                    if (position != null) {
-                        obstaclePositions.add(position);
-                    }
+                    obstaclePositions.add(position);
                 }
+                reader.close();
+                inputStream.close();
             }
         }catch(FileNotFoundException fileException){
-            System.out.println("File " + obstacleFilePath + " is not found");
+            System.out.println("File " + OBSTACLE_FILE_NAME + " is not found");
         }catch(IOException ioException){
-            System.out.println("Obstacle data in file " + obstacleFilePath + "has errors!");
+            System.out.println("Obstacle data in file " + OBSTACLE_FILE_NAME + "has errors!");
         }
         return obstaclePositions;
     }
