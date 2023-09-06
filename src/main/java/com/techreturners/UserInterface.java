@@ -14,7 +14,7 @@ public class UserInterface {
     }
 
     public String getPlateauSize(){
-        String pattern = "\\d\\s*\\d\\s*";
+        String pattern = "\\d+\\s+\\d+\\s*";
         String prompt = "Enter the plateau maximum co-ordinates in format x y : ";
         return getInput(prompt, pattern);
 
