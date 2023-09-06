@@ -48,11 +48,10 @@ public class MarsRoverTestData {
         ArrayList<String> instructionList = new ArrayList<>();
         positionList.add(roverPositions.get(2));
         instructionList.add(roverInstructions.get(2));
-        RoverDataBO roverDataBO = new RoverDataBO(
+        return new RoverDataBO(
                 plateauSizeList.get(1),
                 positionList,
                 instructionList);
-        return roverDataBO;
     }
 
     public RoverDataBO initialiseRoverDataForObstacleDetection(){
@@ -60,11 +59,10 @@ public class MarsRoverTestData {
         ArrayList<String> instructionList = new ArrayList<>();
         positionList.add(roverPositions.get(4));
         instructionList.add(roverInstructions.get(6));
-        RoverDataBO roverDataBO = new RoverDataBO(
+        return new RoverDataBO(
                 plateauSizeList.get(0),
                 positionList,
                 instructionList);
-        return roverDataBO;
     }
 
 

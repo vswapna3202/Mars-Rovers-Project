@@ -3,9 +3,9 @@ package com.techreturners;
 import java.util.Arrays;
 
 public class Rover extends SpaceVehicles {
-    Position position;
-    Direction direction;
-    Instruction instruction;
+    private Position position;
+    private Direction direction;
+    private Instruction instruction;
     public Rover(Position position, Direction direction, Instruction instruction){
         this.position = position;
         this.direction = direction;
@@ -14,20 +14,20 @@ public class Rover extends SpaceVehicles {
 
     protected void rotateLeft(){
         int numDirections = Direction.values().length;
-        direction = Arrays.stream(Direction.values())
+        Arrays.stream(Direction.values())
                 .filter(d -> d.ordinal() == (direction.ordinal()
                         + numDirections - 1) % numDirections)
                 .findFirst()
-                .get();
+                .ifPresent(newDirection -> direction = newDirection);
     }
 
     protected void rotateRight(){
         int numDirections = Direction.values().length;
-        direction = Arrays.stream(Direction.values())
+        Arrays.stream(Direction.values())
                 .filter(d -> d.ordinal() == (direction.ordinal()
                         + numDirections + 1) % numDirections)
                 .findFirst()
-                .get();
+                .ifPresent(newDirection -> direction = newDirection);
     }
 
     protected void moveForward(Plateau plateau) throws CustomRoverException {

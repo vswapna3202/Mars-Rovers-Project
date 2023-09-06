@@ -19,7 +19,7 @@ public class MarsRoverApp {
 
     public ArrayList<String> assignRoverDataAndMoveRover(Plateau plateau)
             throws CustomRoverException{
-        ArrayList<String> finalCoordinates = new ArrayList<String>();
+        ArrayList<String> finalCoordinates = new ArrayList<>();
         ArrayList<String> roverPositionsList = roverDataBO.getRoverPositionsList();
         ArrayList<String> roverInstructionList = roverDataBO.getRoverInstructionsList();
         for(int i=0; i< roverPositionsList.size(); i++){
@@ -57,7 +57,7 @@ public class MarsRoverApp {
 
     public static void main (String[] args){
         boolean isValidScenario = false;
-        UserInterface userInterface = null;
+        UserInterface userInterface;
         while(!isValidScenario) {
             try {
                 userInterface = new UserInterface();
