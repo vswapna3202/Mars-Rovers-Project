@@ -11,7 +11,7 @@ public class MarsRoverTestData {
     public static ArrayList<String> roverInstructions =
             new ArrayList<>(Arrays.asList("LMLMLMLMM","MMRMMRMRRM","MM","LR","RM","LML","RMM"));
     public static ArrayList<Integer> xyValues =
-            new ArrayList<>(Arrays.asList(5,5,1,2,3,3,2,2,3,2,1,1,0,0));
+            new ArrayList<>(Arrays.asList(5,5,1,2,3,3,2,2,3,2,1,1,0,0,3,4));
     public static ArrayList<String> userYesNo =
             new ArrayList<>(Arrays.asList("Y","N"));
     public static ArrayList<String> finalRoverPositions =
@@ -26,6 +26,13 @@ public class MarsRoverTestData {
 
     public static String mainMethodOutputPattern = "Rover 1 is now at new position (.+)";
 
+    public static int obstacleFileRowSize = 2;
+
+    /*
+    Uncomment when testing ObstacleDetectorTest.testReadObstaclePositionsInvalidData
+    method
+    public static String exceptionMessageObstacle = "Invalid obstacle data in file";
+    */
     public RoverDataBO initialiseRoverDataBOObject(boolean multipleFlag){
         ArrayList<String> roverPositionList = new ArrayList<>();
         ArrayList<String> roverInstructionList = new ArrayList<>();

@@ -46,19 +46,24 @@ public class UserInterface {
 
     public RoverDataBO collectRoverData(){
         String plateauSize = getPlateauSize();
-        ArrayList<String> roverPositionList = new ArrayList<String>();
-        ArrayList<String> roverInstructionList = new ArrayList<String>();
+        ArrayList<String> roverPositionList = new ArrayList<>();
+        ArrayList<String> roverInstructionList = new ArrayList<>();
         while(true){
             roverPositionList.add(getRoverPosition());
             roverInstructionList.add(getRoverInstruction());
-            System.out.print("Do you have more Rovers? (Y/N): ");
-            String inputStr = scanner.nextLine().trim().toUpperCase();
-            if(!inputStr.equals("Y")){
+            String inputStr;
+            while(true) {
+                System.out.print("Do you have more Rovers? (Y/N): ");
+                inputStr = scanner.nextLine().trim().toUpperCase();
+                if (inputStr.equals("Y") || inputStr.equals("N")) {
+                    break;
+                }
+            }
+            if (inputStr.equals("N")) {
                 break;
             }
         }
-        RoverDataBO roverDataBO = new RoverDataBO(plateauSize,
+        return new RoverDataBO(plateauSize,
                 roverPositionList, roverInstructionList);
-        return roverDataBO;
     }
 }

@@ -3,9 +3,9 @@ package com.techreturners;
 import java.util.ArrayList;
 
 public class RoverDataBO {
-    private String plateauSize;
-    private ArrayList<String> roverPositionsList;
-    private ArrayList<String> roverInstructionsList;
+    private final String plateauSize;
+    private final ArrayList<String> roverPositionsList;
+    private final ArrayList<String> roverInstructionsList;
 
     public RoverDataBO(String plateauSize,
                        ArrayList<String > roverPositionsList,
