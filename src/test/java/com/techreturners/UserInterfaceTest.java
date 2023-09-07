@@ -5,7 +5,14 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UserInterfaceTest {
     UserInterface userInterface;
@@ -125,5 +132,27 @@ public class UserInterfaceTest {
                 MarsRoverTestData.userYesNo.get(1));
         RoverDataBO roverDataBOFromMethod = userInterface.collectRoverData();
         assertRoverDataBO(marsRoverDataTestBO, roverDataBOFromMethod);
+    }
+
+    @Test
+    public void testDisplayRoverFinalCoordinates(){
+        ArrayList<String> finalCoordinates = new ArrayList<>();
+        finalCoordinates.add(MarsRoverTestData.finalRoverPositions.get(0));
+
+        PrintStream originalOut = System.out;
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+
+        userInterface.displayRoverFinalCoordinates(finalCoordinates);
+        String consoleOutput = outputStream.toString();
+
+        Pattern pattern = Pattern.compile(MarsRoverTestData.mainMethodOutputPattern);
+        Matcher matcher = pattern.matcher(consoleOutput);
+        assertTrue(matcher.find());
+        String actualOutput = matcher.group(1);
+
+        assertEquals(MarsRoverTestData.finalRoverPositions.get(0), actualOutput);
+        System.setOut(originalOut);
+
     }
 }

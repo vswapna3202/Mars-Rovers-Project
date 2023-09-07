@@ -49,14 +49,6 @@ public class MarsRoverApp {
 
     }
 
-    private void displayRoverFinalCoordinates(ArrayList<String> finalCoordinates){
-        int index = 1;
-        for (String coordinate : finalCoordinates){
-            System.out.println("Rover "+index+" is now at new position "+coordinate);
-            index += 1;
-        }
-    }
-
     public void startApplication(){
         boolean isValidScenario = false;
         UserInterface userInterface;
@@ -66,7 +58,7 @@ public class MarsRoverApp {
                 RoverDataBO roverDataBO = userInterface.collectRoverData();
                 setRoverDataBO(roverDataBO);
 
-                displayRoverFinalCoordinates(processRoverData());
+                userInterface.displayRoverFinalCoordinates(processRoverData());
                 isValidScenario = true;
                 userInterface.getScanner().close();
             } catch (CustomRoverException cre) {

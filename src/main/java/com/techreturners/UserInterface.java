@@ -66,4 +66,12 @@ public class UserInterface {
         return new RoverDataBO(plateauSize,
                 roverPositionList, roverInstructionList);
     }
+
+    public void displayRoverFinalCoordinates(ArrayList<String> finalCoordinates){
+        int index = 1;
+        for (String coordinate : finalCoordinates){
+            System.out.println("Rover "+index+" is now deployed at new position "+coordinate);
+            index += 1;
+        }
+    }
 }

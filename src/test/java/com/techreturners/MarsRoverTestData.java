@@ -24,7 +24,7 @@ public class MarsRoverTestData {
     public static String[] roverInstructionsInvalidData = {
             "","ABABABCCC","121212333","%$%$%$£££","L M L M  M ","lml"};
 
-    public static String mainMethodOutputPattern = "Rover 1 is now at new position (.+)";
+    public static String mainMethodOutputPattern = "Rover 1 is now deployed at new position (.+)";
 
     public static int obstacleFileRowSize = 2;
 
