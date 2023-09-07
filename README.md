@@ -24,7 +24,8 @@ Rover can perform actions such as rotating left and rotating right by 90 degrees
   N if only this single rover needs to rotate and/or move
 
 ### **Outputs:**
-The output is its final position (final co-ordinates where it is facing) example 1 3 N
+The output is its final position (final co-ordinates where it is facing) example
+Rover 1 is now at new position 1 3 N
 
 ### **Example:**
 - Enter the plateau maximum co-ordinates in format x y : 5 5
@@ -54,6 +55,9 @@ The output is its final position (final co-ordinates where it is facing) example
     - Taking videos
     - Perform self diagnostic schedules
     - Get Telemetry data
-- Plateaus can not only be rectangular can be other shapes like square, circle etc
+- Plateaus can not only be rectangular can be other shapes like circle, hexagon etc
 - Other vehicles can also roam on the Mars terrain
+- obstacles.txt needs to be entered by user for fixed rover positions in this release. 
+  This needs could be enhanced to updated and deleted automatically as rovers move 
+  positions
   
