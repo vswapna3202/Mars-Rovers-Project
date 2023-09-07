@@ -60,4 +60,17 @@ public class ObstacleDetector {
         }
         return false;
     }
+
+    public boolean detectsObstacle(ArrayList<String> finalCoordinates){
+        if (finalCoordinates.size() != 1) {
+            for (int k = 0; k < finalCoordinates.size()-1; k++) {
+                for (int j = k+1; j < finalCoordinates.size(); j++) {
+                    if (finalCoordinates.get(k).equals(finalCoordinates.get(j))) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 }

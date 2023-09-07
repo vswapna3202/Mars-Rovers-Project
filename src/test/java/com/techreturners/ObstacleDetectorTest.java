@@ -1,7 +1,11 @@
 package com.techreturners;
 
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
+
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ObstacleDetectorTest {
@@ -32,6 +36,16 @@ public class ObstacleDetectorTest {
         obstacleDetector.readObstaclePositionsFromFile();
         assertEquals(obstacleDetector.getObstaclePositions().size(),
                 MarsRoverTestData.obstacleFileRowSize);
+    }
+
+    @Test
+    public void testDetectObstacles(){
+        ArrayList<String> finalCoordinates = new ArrayList<>();
+        //When final co-ordinates are same for multi rovers
+        finalCoordinates.add(MarsRoverTestData.finalRoverPositions.get(4));
+        finalCoordinates.add(MarsRoverTestData.finalRoverPositions.get(4));
+
+        assertTrue(obstacleDetector.detectsObstacle(finalCoordinates));
     }
 
     /*

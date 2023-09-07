@@ -40,6 +40,11 @@ public class MarsRoverApp {
                 throw new IllegalArgumentException("Invalid Input of Positions!");
             }
         }
+        ObstacleDetector obstacleDetector = new ObstacleDetector();
+        if (obstacleDetector.detectsObstacle(finalCoordinates)){
+            throw new CustomRoverException
+                    ("Rover will collide with an obstacle with current instructions.");
+        }
         return finalCoordinates;
     }
 
@@ -62,7 +67,7 @@ public class MarsRoverApp {
                 isValidScenario = true;
                 userInterface.getScanner().close();
             } catch (CustomRoverException cre) {
-                System.out.println(" Please Re-enter Rover data!" + cre.getMessage());
+                System.out.println(" Please Re-enter Rover data! " + cre.getMessage());
             }
         }
     }

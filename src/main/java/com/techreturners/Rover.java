@@ -3,9 +3,9 @@ package com.techreturners;
 import java.util.Arrays;
 
 public class Rover extends SpaceVehicles {
-    private Position position;
+    private final Position position;
     private Direction direction;
-    private Instruction instruction;
+    private final Instruction instruction;
     public Rover(Position position, Direction direction, Instruction instruction){
         this.position = position;
         this.direction = direction;
@@ -41,7 +41,7 @@ public class Rover extends SpaceVehicles {
             case E -> currentXCoordinate++;
             case S -> currentYCoordinate--;
         }
-        //ObstacleDetector obstacleDetector = new ObstacleDetector();
+
         if(!plateau.isWithinBounds(currentXCoordinate, currentYCoordinate))
             throw new CustomRoverException("Rover will cross the plateau boundary specified with current instructions. ");
         if (obstacleDetector.detectsObstacle(currentXCoordinate, currentYCoordinate)){
