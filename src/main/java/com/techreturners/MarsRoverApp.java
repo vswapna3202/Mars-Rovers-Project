@@ -5,11 +5,8 @@ import java.util.StringTokenizer;
 
 public class MarsRoverApp {
 
-    RoverDataBO roverDataBO;
+    private RoverDataBO roverDataBO;
     public MarsRoverApp(){}
-    /*public MarsRoverApp(){
-        this.roverDataBO = roverDataBO;
-    }*/
 
     public Plateau assignPlateauSize(RoverDataBO roverDataBO){
         String plateauSize = roverDataBO.getPlateauSize();

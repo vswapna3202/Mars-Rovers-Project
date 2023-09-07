@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class ObstacleDetector {
 
-    private ArrayList<Position> obstaclePositions;
+    private final ArrayList<Position> obstaclePositions;
     private static final String OBSTACLE_FILE_NAME = "obstacles.txt";
     public ObstacleDetector(){
         obstaclePositions = new ArrayList<>();
