@@ -29,7 +29,8 @@ public class MarsRoverAppTest {
         plateau = marsRoverTestData.initialisePlateauObject();
         roverOneDataTestBO = marsRoverTestData.initialiseRoverDataBOObject(false);
         roverTwoDataTestBO = marsRoverTestData.initialiseRoverDataBOObject(true);
-        marsRoverApp = new MarsRoverApp(roverOneDataTestBO);
+        marsRoverApp = new MarsRoverApp();
+        marsRoverApp.setRoverDataBO(roverOneDataTestBO);
     }
 
     @After
@@ -57,7 +58,8 @@ public class MarsRoverAppTest {
     @Test
     public void testAssignRoverDataAndMoveRoverMultiRovers()
             throws CustomRoverException{
-        marsRoverApp = new MarsRoverApp(roverTwoDataTestBO);
+        marsRoverApp = new MarsRoverApp();
+        marsRoverApp.setRoverDataBO(roverTwoDataTestBO);
         ArrayList<String> finalCoordinates =
                 marsRoverApp.assignRoverDataAndMoveRover(plateau);
         assertFinalCoordinates(finalCoordinates);
@@ -67,7 +69,8 @@ public class MarsRoverAppTest {
     public void testAssignRoverDataAndMoveRoverCheckInvalidInput()
             throws CustomRoverException{
         roverOneDataTestBO = marsRoverTestData.initialiseRoverDataForInvalidInput();
-        marsRoverApp = new MarsRoverApp(roverOneDataTestBO);
+        marsRoverApp = new MarsRoverApp();
+        marsRoverApp.setRoverDataBO(roverOneDataTestBO);
 
         marsRoverApp.assignRoverDataAndMoveRover(
                 new RectanglePlateau(MarsRoverTestData.xyValues.get(10),
@@ -78,7 +81,8 @@ public class MarsRoverAppTest {
     public void testAssignRoverDataAndMoveRoverCheckExceptionInvalidBoundary()
             throws CustomRoverException{
         roverOneDataTestBO = marsRoverTestData.initialiseRoverDataForBoundary();
-        marsRoverApp = new MarsRoverApp(roverOneDataTestBO);
+        marsRoverApp = new MarsRoverApp();
+        marsRoverApp.setRoverDataBO(roverOneDataTestBO);
 
         marsRoverApp.assignRoverDataAndMoveRover(
                 new RectanglePlateau(MarsRoverTestData.xyValues.get(10),
@@ -89,7 +93,8 @@ public class MarsRoverAppTest {
     public void testAssignRoverDataAndMoveRoverCheckExceptionObstacleDetected()
             throws CustomRoverException{
         roverOneDataTestBO = marsRoverTestData.initialiseRoverDataForObstacleDetection();
-        marsRoverApp = new MarsRoverApp(roverOneDataTestBO);
+        marsRoverApp = new MarsRoverApp();
+        marsRoverApp.setRoverDataBO(roverOneDataTestBO);
 
         marsRoverApp.assignRoverDataAndMoveRover(
                 new RectanglePlateau(MarsRoverTestData.xyValues.get(0),
@@ -115,7 +120,8 @@ public class MarsRoverAppTest {
     public void testProcessRoverDataRoverCheckExceptionThrownIfBoundaryCrossed()
             throws CustomRoverException{
         roverOneDataTestBO = marsRoverTestData.initialiseRoverDataForBoundary();
-        marsRoverApp = new MarsRoverApp(roverOneDataTestBO);
+        marsRoverApp = new MarsRoverApp();
+        marsRoverApp.setRoverDataBO(roverOneDataTestBO);
         marsRoverApp.processRoverData();
     }
 
@@ -124,13 +130,15 @@ public class MarsRoverAppTest {
             throws CustomRoverException{
         roverOneDataTestBO =
                 marsRoverTestData.initialiseRoverDataForObstacleDetection();
-        marsRoverApp = new MarsRoverApp(roverOneDataTestBO);
+        marsRoverApp = new MarsRoverApp();
+        marsRoverApp.setRoverDataBO(roverOneDataTestBO);
         marsRoverApp.processRoverData();
     }
 
     @Test
     public void testProcessRoverDataMultiRovers() throws CustomRoverException{
-        marsRoverApp = new MarsRoverApp(roverTwoDataTestBO);
+        marsRoverApp = new MarsRoverApp();
+        marsRoverApp.setRoverDataBO(roverTwoDataTestBO);
         ArrayList<String> finalCoordinates = marsRoverApp.processRoverData();
         assertFinalCoordinates(finalCoordinates);
     }

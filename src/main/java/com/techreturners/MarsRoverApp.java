@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class MarsRoverApp {
+
     RoverDataBO roverDataBO;
-    public MarsRoverApp(RoverDataBO roverDataBO){
+    public MarsRoverApp(){}
+    /*public MarsRoverApp(){
         this.roverDataBO = roverDataBO;
-    }
+    }*/
 
     public Plateau assignPlateauSize(RoverDataBO roverDataBO){
         String plateauSize = roverDataBO.getPlateauSize();
@@ -55,21 +57,29 @@ public class MarsRoverApp {
         }
     }
 
-    public static void main (String[] args){
+    public void startApplication(){
         boolean isValidScenario = false;
         UserInterface userInterface;
         while(!isValidScenario) {
             try {
                 userInterface = new UserInterface();
                 RoverDataBO roverDataBO = userInterface.collectRoverData();
-                MarsRoverApp marsRoverApp = new MarsRoverApp(roverDataBO);
+                setRoverDataBO(roverDataBO);
 
-                marsRoverApp.displayRoverFinalCoordinates(marsRoverApp.processRoverData());
+                displayRoverFinalCoordinates(processRoverData());
                 isValidScenario = true;
                 userInterface.getScanner().close();
             } catch (CustomRoverException cre) {
                 System.out.println(" Please Re-enter Rover data!" + cre.getMessage());
             }
         }
+    }
+    public void setRoverDataBO(RoverDataBO roverDataBO) {
+        this.roverDataBO = roverDataBO;
+    }
+
+    public static void main (String[] args){
+        MarsRoverApp marsRoverApp = new MarsRoverApp();
+        marsRoverApp.startApplication();
     }
 }
