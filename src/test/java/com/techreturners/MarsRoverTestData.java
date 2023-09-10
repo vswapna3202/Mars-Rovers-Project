@@ -7,11 +7,11 @@ public class MarsRoverTestData {
     public static ArrayList<String> plateauSizeList =
             new ArrayList<>(Arrays.asList("5 5","1 1","2 2"));
     public static ArrayList<String> roverPositions =
-            new ArrayList<>(Arrays.asList("1 2 N", "3 3 E", "0 0 N", "2 2 S", "3 2 W","3 3 3 N"));
+            new ArrayList<>(Arrays.asList("1 2 N", "3 3 E", "0 0 N", "2 2 S", "3 2 W","3 3 3 N","1 2 N","1 4 N"));
     public static ArrayList<String> roverInstructions =
             new ArrayList<>(Arrays.asList("LMLMLMLMM","MMRMMRMRRM","MM","LR","RM","LML","RMM"));
     public static ArrayList<Integer> xyValues =
-            new ArrayList<>(Arrays.asList(5,5,1,2,3,3,2,2,3,2,1,1,0,0,3,4));
+            new ArrayList<>(Arrays.asList(5,5,1,2,3,3,2,2,3,2,1,1,0,0,3,4,1,2,1,4));
     public static ArrayList<String> userYesNo =
             new ArrayList<>(Arrays.asList("Y","N"));
     public static ArrayList<String> finalRoverPositions =
@@ -25,8 +25,8 @@ public class MarsRoverTestData {
             "","ABABABCCC","121212333","%$%$%$£££","L M L M  M ","lml"};
 
     public static String mainMethodOutputPattern = "Rover 1 is now deployed at new position (.+)";
-
-    public static int obstacleFileRowSize = 2;
+    public static String obstacleErrorMessage = "Rover Collision for Rover 2" +
+        " and Rover 1 not deploying Rover 2 to location";
 
     /*
     Uncomment when testing ObstacleDetectorTest.testReadObstaclePositionsInvalidData
@@ -74,8 +74,10 @@ public class MarsRoverTestData {
     public RoverDataBO initialiseRoverDataForObstacleDetection(){
         ArrayList<String> positionList = new ArrayList<>();
         ArrayList<String> instructionList = new ArrayList<>();
-        positionList.add(roverPositions.get(4));
-        instructionList.add(roverInstructions.get(6));
+        positionList.add(roverPositions.get(6));
+        positionList.add(roverPositions.get(7));
+        instructionList.add(roverInstructions.get(2));
+        instructionList.add(roverInstructions.get(3));
         return new RoverDataBO(
                 plateauSizeList.get(0),
                 positionList,

@@ -89,16 +89,17 @@ public class MarsRoverAppTest {
                 MarsRoverTestData.xyValues.get(11)));
     }
 
-    @Test(expected = CustomRoverException.class)
+    @Test
     public void testAssignRoverDataAndMoveRoverCheckExceptionObstacleDetected()
             throws CustomRoverException{
         roverOneDataTestBO = marsRoverTestData.initialiseRoverDataForObstacleDetection();
         marsRoverApp = new MarsRoverApp();
         marsRoverApp.setRoverDataBO(roverOneDataTestBO);
 
-        marsRoverApp.assignRoverDataAndMoveRover(
+        ArrayList<String> result = marsRoverApp.assignRoverDataAndMoveRover(
                 new RectanglePlateau(MarsRoverTestData.xyValues.get(0),
                         MarsRoverTestData.xyValues.get(1)));
+        assertEquals(MarsRoverTestData.obstacleErrorMessage, result.get(1));
     }
 
     private static void assertFinalCoordinates(
@@ -125,14 +126,15 @@ public class MarsRoverAppTest {
         marsRoverApp.processRoverData();
     }
 
-    @Test(expected = CustomRoverException.class )
+    @Test
     public void testProcessRoverDataRoverCheckExceptionThrownIfObstacleDetected()
             throws CustomRoverException{
         roverOneDataTestBO =
                 marsRoverTestData.initialiseRoverDataForObstacleDetection();
         marsRoverApp = new MarsRoverApp();
         marsRoverApp.setRoverDataBO(roverOneDataTestBO);
-        marsRoverApp.processRoverData();
+        ArrayList<String> result = marsRoverApp.processRoverData();
+        assertEquals(MarsRoverTestData.obstacleErrorMessage, result.get(1));
     }
 
     @Test

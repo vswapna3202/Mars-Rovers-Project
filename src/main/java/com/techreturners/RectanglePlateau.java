@@ -22,9 +22,7 @@ public class RectanglePlateau extends Plateau{
     public boolean isWithinBounds(int newX, int newY){
         if (newX < minX || newY < minY)
             return false;
-        else if (newX > maxX || newY > maxY)
-            return false;
-        return true;
+        else return newX <= maxX && newY <= maxY;
     }
 
 }

@@ -70,7 +70,11 @@ public class UserInterface {
     public void displayRoverFinalCoordinates(ArrayList<String> finalCoordinates){
         int index = 1;
         for (String coordinate : finalCoordinates){
-            System.out.println("Rover "+index+" is now deployed at new position "+coordinate);
+            if (coordinate.length() == 5)
+                System.out.println("Rover "+index+" is now deployed at new position "
+                        +coordinate);
+            else
+                System.out.println(coordinate);
             index += 1;
         }
     }

@@ -38,10 +38,7 @@ public class MarsRoverApp {
             }
         }
         ObstacleDetector obstacleDetector = new ObstacleDetector();
-        if (obstacleDetector.detectsObstacle(finalCoordinates)){
-            throw new CustomRoverException
-                    ("Rover will collide with an obstacle with current instructions.");
-        }
+        obstacleDetector.detectsObstacle(finalCoordinates);
         return finalCoordinates;
     }
 

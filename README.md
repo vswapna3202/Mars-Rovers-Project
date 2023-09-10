@@ -44,7 +44,8 @@ Rover 1 is now at new position 1 3 N
 - Rovers move sequentially that is one rover would finish its movement before next
   rover moves
 - Plateau boundary min position is always 0 0 and max is specified by user
-- The obstacles are input as part of obstacles.txt file stored in resources folder
+- Rover will not be deployed or move forward as per instructions if an obstacle exists 
+  in its path
 
 ### **Future Considerations:**
 - Rover can not only have plateaus it can have other criteria like mounds 
@@ -57,7 +58,5 @@ Rover 1 is now at new position 1 3 N
     - Get Telemetry data
 - Plateaus can not only be rectangular can be other shapes like circle, hexagon etc
 - Other vehicles can also roam on the Mars terrain
-- obstacles.txt needs to be entered by user for fixed rover positions in this release. 
-  This needs could be enhanced to updated and deleted automatically as rovers move 
-  positions
+- Rover positions can be stored in a file and recorded
   

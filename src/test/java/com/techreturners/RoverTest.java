@@ -65,17 +65,4 @@ public class RoverTest {
                 new RectanglePlateau(MarsRoverTestData.xyValues.get(10),
                         MarsRoverTestData.xyValues.get(10)));
     }
-
-    @Test(expected = CustomRoverException.class)
-    public void testCalculateNewCoordinatesForObstacleDetected()
-            throws CustomRoverException{
-        marsRover = new Rover(new Position(MarsRoverTestData.xyValues.get(8),
-                MarsRoverTestData.xyValues.get(9)),
-                Direction.W,
-                new Instruction(MarsRoverTestData.roverInstructions.get(6)));
-        marsRover.calculateNewCoordinates(
-                new RectanglePlateau(MarsRoverTestData.xyValues.get(0),
-                        MarsRoverTestData.xyValues.get(0)));
-    }
-
 }
