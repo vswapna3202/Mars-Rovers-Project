@@ -3,6 +3,8 @@ package com.techreturners;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RoverTest {
@@ -23,6 +25,8 @@ public class RoverTest {
         marsRover = new Rover(new Position(MarsRoverTestData.xyValues.get(2),
                 MarsRoverTestData.xyValues.get(3)),
                 Direction.N,new Instruction(MarsRoverTestData.roverInstructions.get(0)));
+        ArrayList<String> finalCoordinates = new ArrayList<>();
+        marsRover.setFinalCoordinates(finalCoordinates);
         plateau = new RectanglePlateau(
                 MarsRoverTestData.xyValues.get(0),
                 MarsRoverTestData.xyValues.get(1));
@@ -34,6 +38,7 @@ public class RoverTest {
         marsRover = new Rover(new Position(MarsRoverTestData.xyValues.get(4),
                 MarsRoverTestData.xyValues.get(5)),
                 Direction.E,new Instruction(MarsRoverTestData.roverInstructions.get(1)));
+        marsRover.setFinalCoordinates(finalCoordinates);
         assertEquals(MarsRoverTestData.finalRoverPositions.get(1),
                 marsRover.calculateNewCoordinates(plateau));
         /* Testing for valid rover data within boundary and no obstacle in
@@ -42,6 +47,7 @@ public class RoverTest {
         marsRover = new Rover(new Position(MarsRoverTestData.xyValues.get(6),
                 MarsRoverTestData.xyValues.get(7)),
                 Direction.S, new Instruction(MarsRoverTestData.roverInstructions.get(3)));
+        marsRover.setFinalCoordinates(finalCoordinates);
         assertEquals(MarsRoverTestData.finalRoverPositions.get(2),
                 marsRover.calculateNewCoordinates(plateau));
         /* Testing for valid rover data within boundary and no obstacle in
@@ -50,6 +56,7 @@ public class RoverTest {
         marsRover = new Rover(new Position(MarsRoverTestData.xyValues.get(8),
                 MarsRoverTestData.xyValues.get(9)),
                 Direction.W, new Instruction(MarsRoverTestData.roverInstructions.get(4)));
+        marsRover.setFinalCoordinates(finalCoordinates);
         assertEquals(MarsRoverTestData.finalRoverPositions.get(3),
                 marsRover.calculateNewCoordinates(plateau));
     }
@@ -61,6 +68,7 @@ public class RoverTest {
                 MarsRoverTestData.xyValues.get(13)),
                 Direction.N,
                 new Instruction(MarsRoverTestData.roverInstructions.get(2)));
+        marsRover.setFinalCoordinates(new ArrayList<>());
         marsRover.calculateNewCoordinates(
                 new RectanglePlateau(MarsRoverTestData.xyValues.get(10),
                         MarsRoverTestData.xyValues.get(10)));

@@ -32,13 +32,15 @@ public class MarsRoverApp {
                 Instruction roverInstruction = new Instruction(roverInstructionList.get(i));
                 Rover marsRover = new Rover(roverPosition,
                         roverDirection,roverInstruction);
-                finalCoordinates.add(marsRover.calculateNewCoordinates(plateau));
+                marsRover.setFinalCoordinates(finalCoordinates);
+                String coordinateString = marsRover.calculateNewCoordinates(plateau);
+                if (!coordinateString.isEmpty())
+                    finalCoordinates.add(coordinateString);
             }else{
                 throw new IllegalArgumentException("Invalid Input of Positions!");
             }
         }
-        ObstacleDetector obstacleDetector = new ObstacleDetector();
-        obstacleDetector.detectsObstacle(finalCoordinates);
+        ObstacleDetector.detectsObstacle(finalCoordinates);
         return finalCoordinates;
     }
 

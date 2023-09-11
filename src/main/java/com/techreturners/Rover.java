@@ -1,15 +1,22 @@
 package com.techreturners;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Rover extends SpaceVehicles {
     private final Position position;
     private Direction direction;
     private final Instruction instruction;
+
+    private ArrayList<String> finalCoordinates;
     public Rover(Position position, Direction direction, Instruction instruction){
         this.position = position;
         this.direction = direction;
         this.instruction = instruction;
+    }
+
+    public void setFinalCoordinates(ArrayList<String> finalCoordinates) {
+        this.finalCoordinates = finalCoordinates;
     }
 
     protected void rotateLeft(){
@@ -30,7 +37,7 @@ public class Rover extends SpaceVehicles {
                 .ifPresent(newDirection -> direction = newDirection);
     }
 
-    protected void moveForward(Plateau plateau)
+    protected boolean moveForward(Plateau plateau)
             throws CustomRoverException {
         int currentXCoordinate = position.getxCoordinate();
         int currentYCoordinate = position.getyCoordinate();
@@ -45,18 +52,32 @@ public class Rover extends SpaceVehicles {
             throw new CustomRoverException("Rover will cross the plateau boundary specified with current instructions. ");
         position.setxCoordinate(currentXCoordinate);
         position.setyCoordinate(currentYCoordinate);
+        //If user does not choose move forward still the obstacles are checked
+        return(ObstacleDetector.detectsObstacle(this.finalCoordinates,
+                currentXCoordinate,
+                currentYCoordinate));
     }
 
 
-    public String calculateNewCoordinates(Plateau plateau) throws CustomRoverException{
+    public String calculateNewCoordinates(Plateau plateau)
+            throws CustomRoverException{
+        boolean obstacleFlag = false;
         for(char instructionChar : instruction.getInstruction().toCharArray()){
             switch (instructionChar) {
                 case 'L' -> rotateLeft();
                 case 'R' -> rotateRight();
-                case 'M' -> moveForward(plateau);
+                case 'M' -> obstacleFlag = moveForward(plateau);
                 default -> throw new IllegalArgumentException("Invalid instruction!");
             }
+            // No need to do further instructions as an obstacle found in path
+            // rover cannot be moved
+            if (obstacleFlag) break;
         }
-        return position.getxCoordinate()+" "+position.getyCoordinate()+" "+direction;
+        //If obstacles do not exist return new coordinates with direction
+        //else return an empty string
+        if (!obstacleFlag)
+            return position.getxCoordinate()+" "+position.getyCoordinate()+" "+direction;
+        else
+            return "";
     }
 }

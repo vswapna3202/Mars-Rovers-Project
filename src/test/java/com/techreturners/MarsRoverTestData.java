@@ -28,6 +28,10 @@ public class MarsRoverTestData {
     public static String obstacleErrorMessage = "Rover Collision for Rover 2" +
         " and Rover 1 not deploying Rover 2 to location";
 
+    public static String obstacleErrorMessageWhenRoverInWay =
+            "Rover Collision! Another Rover on rover route! Not deploying Rover"+
+                    " to location";
+
     /*
     Uncomment when testing ObstacleDetectorTest.testReadObstaclePositionsInvalidData
     method
