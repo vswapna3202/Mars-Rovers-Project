@@ -4,6 +4,17 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserInterface {
+    private static final String COMMON_PREFIX = "\\d+\\s+\\d+\\s*";
+    private static final String COORDINATE_PATTERN = COMMON_PREFIX +".*";
+    private static final String ROVER_POSITION_PATTERN = COMMON_PREFIX+"[NSEWnsew]";
+    private static final String ROVER_INSTRUCTION_PATTERN = "^[LRMlrm]+$";
+    private static final String[] PROMPTS = {
+            "Enter the plateau maximum co-ordinates in format x y : ",
+            "Enter the current Rover position co-ordinates in"
+                    +" format x y direction e.g. 1 2 N : ",
+            "Enter the instruction for rover movement(L,R or M): "
+    };
+
     private final Scanner scanner;
     public UserInterface(){
         scanner = new Scanner(System.in);
@@ -14,30 +25,22 @@ public class UserInterface {
     }
 
     public String getPlateauSize(){
-        String pattern = "\\d+\\s+\\d+\\s*";
-        String prompt = "Enter the plateau maximum co-ordinates in format x y : ";
-        return getInput(prompt, pattern);
-
+        return getInput(0, COORDINATE_PATTERN);
     }
 
     public String getRoverPosition(){
-        String pattern = "\\d+\\s+\\d+\\s+[NSEWnsew]";
-        String prompt = "Enter the current Rover position co-ordinates in"
-                +" format x y direction e.g. 1 2 N : ";
-        return getInput(prompt, pattern);
+        return getInput(1,ROVER_POSITION_PATTERN);
     }
 
     public String getRoverInstruction(){
-        String pattern = "^[LRMlrm]+$";
-        String prompt = "Enter the instruction for rover movement(L,R or M): ";
-        return getInput(prompt, pattern);
+        return getInput(2, ROVER_INSTRUCTION_PATTERN);
     }
 
-    private String getInput(String prompt, String pattern){
+    private String getInput(int index, String pattern){
         boolean isValid = false;
         String inputString = "";
         while(!isValid) {
-            System.out.print(prompt);
+            System.out.print(PROMPTS[index]);
             inputString = scanner.nextLine().trim().toUpperCase();
             isValid = inputString.matches(pattern);
         }
