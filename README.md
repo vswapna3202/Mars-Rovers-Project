@@ -7,8 +7,8 @@
 - Navigate to project directory Mars-Rover-Challenge
 - Run 'mvn test' to build and test the project
 
-### **Project start**
-- You can start the app by executing main method from com.techreturners.MarsRoverApp
+### **Application start**
+- You can start the application by executing main method from com.techreturners.MarsRoverApp
 
 ### **Project Brief**
 This application enables the Mars Rover to navigate about the Martian terrain. The
