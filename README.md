@@ -7,6 +7,9 @@
 - Navigate to project directory Mars-Rover-Challenge
 - Run 'mvn test' to build and test the project
 
+### **Project start**
+- You can start the app by executing main method from com.techreturners.MarsRoverApp
+
 ### **Project Brief**
 This application enables the Mars Rover to navigate about the Martian terrain. The
 Rover can perform actions such as rotating left and rotating right by 90 degrees and moving forward by one step. Rover's movements are restricted by certain conditions:
