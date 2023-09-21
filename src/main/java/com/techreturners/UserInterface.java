@@ -43,6 +43,14 @@ public class UserInterface {
             System.out.print(PROMPTS[index]);
             inputString = scanner.nextLine().trim().toUpperCase();
             isValid = inputString.matches(pattern);
+            if(!isValid){
+                System.out.println("Invalid input entered. The inputs should be as follows:" +
+                "\nPlateau Co-ordinates: x y [where x and y should be any valid integers]" +
+                "\nRover Co-ordinates: x y Direction [where x and y are any valid integers," +
+                " Direction can be any of the following N,S,E,W,n,s,e,w]" +
+                "\nRover Instructions: instructions [where instructions can be L,R,M,l,r,m entered one after other" +
+                " without any spaces like lrlrlrr]");
+            }
         }
         return inputString;
     }
@@ -60,6 +68,8 @@ public class UserInterface {
                 inputStr = scanner.nextLine().trim().toUpperCase();
                 if (inputStr.equals("Y") || inputStr.equals("N")) {
                     break;
+                }else{
+                    System.out.println("Please enter either Y or N");
                 }
             }
             if (inputStr.equals("N")) {
