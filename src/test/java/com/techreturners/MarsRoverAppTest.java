@@ -40,7 +40,7 @@ public class MarsRoverAppTest {
     }
 
     @Test
-    public void testAssignPlateauSizeValid(){
+    public void testAssignPlateauSizeValid() throws CustomRoverException{
         RectanglePlateau rectanglePlateau =
                 (RectanglePlateau) marsRoverApp.assignPlateauSize(roverOneDataTestBO);
         assertEquals(MarsRoverTestData.xyValues.get(0), rectanglePlateau.getMaxX());

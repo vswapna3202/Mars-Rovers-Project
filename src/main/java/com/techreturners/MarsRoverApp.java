@@ -8,11 +8,19 @@ public class MarsRoverApp {
     private RoverDataBO roverDataBO;
     public MarsRoverApp(){}
 
-    public Plateau assignPlateauSize(RoverDataBO roverDataBO){
+    public Plateau assignPlateauSize(RoverDataBO roverDataBO)
+            throws CustomRoverException{
+        int xCoordinate;
+        int yCoordinate;
         String plateauSize = roverDataBO.getPlateauSize();
         StringTokenizer tokenizer = new StringTokenizer(plateauSize);
-        int xCoordinate = Integer.parseInt(tokenizer.nextToken());
-        int yCoordinate = Integer.parseInt(tokenizer.nextToken());
+        try {
+            xCoordinate = Integer.parseInt(tokenizer.nextToken());
+            yCoordinate = Integer.parseInt(tokenizer.nextToken());
+        }catch(NumberFormatException nfe){
+            throw new CustomRoverException("Invalid inputs entered for Plateau"+
+            "co-ordinates. Please enter integers only");
+        }
         return new RectanglePlateau(xCoordinate, yCoordinate);
     }
 
@@ -54,9 +62,17 @@ public class MarsRoverApp {
         return Direction.valueOf(roverPositionParts[2]);
     }
 
-    private Position createRoverPosition(String[] roverPositionParts){
-        int newXCoordinate = Integer.parseInt(roverPositionParts[0]);
-        int newYCoordinate = Integer.parseInt(roverPositionParts[1]);
+    private Position createRoverPosition(String[] roverPositionParts) throws
+            CustomRoverException{
+        int newXCoordinate;
+        int newYCoordinate;
+        try {
+            newXCoordinate = Integer.parseInt(roverPositionParts[0]);
+            newYCoordinate = Integer.parseInt(roverPositionParts[1]);
+        }catch(NumberFormatException nfe){
+            throw new CustomRoverException("Co-ordinates entered are invalid. Please" +
+                    " enter valid integers only");
+        }
         return new Position(newXCoordinate, newYCoordinate);
     }
 
