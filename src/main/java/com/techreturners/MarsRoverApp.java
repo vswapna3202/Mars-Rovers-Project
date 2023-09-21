@@ -21,27 +21,50 @@ public class MarsRoverApp {
         ArrayList<String> finalCoordinates = new ArrayList<>();
         ArrayList<String> roverPositionsList = roverDataBO.getRoverPositionsList();
         ArrayList<String> roverInstructionList = roverDataBO.getRoverInstructionsList();
-        for(int i=0; i< roverPositionsList.size(); i++){
-            String[] parts = roverPositionsList.get(i).split("\\s");
-            if (parts.length == 3){
-                int newXCoordinate = Integer.parseInt(parts[0]);
-                int newYCoordinate = Integer.parseInt(parts[1]);
-                Position roverPosition = new Position(newXCoordinate,
-                        newYCoordinate);
-                Direction roverDirection = Direction.valueOf(parts[2]);
-                Instruction roverInstruction = new Instruction(roverInstructionList.get(i));
-                Rover marsRover = new Rover(roverPosition,
-                        roverDirection,roverInstruction);
-                marsRover.setFinalCoordinates(finalCoordinates);
-                String coordinateString = marsRover.calculateNewCoordinates(plateau);
-                if (!coordinateString.isEmpty())
-                    finalCoordinates.add(coordinateString);
-            }else{
-                throw new IllegalArgumentException("Invalid Input of Positions!");
-            }
+        for(String roverPositionString : roverPositionsList) {
+            String[] roverPositionParts = roverPositionString.split("\\s");
+            validateRoverPositionParts(roverPositionParts);
+            Position roverPosition = createRoverPosition(roverPositionParts);
+            Direction roverDirection = createRoverDirection(roverPositionParts);
+            Instruction roverInstruction = new Instruction(roverInstructionList.get(
+                    roverPositionsList.indexOf(roverPositionString)));
+
+            Rover marsRover = new Rover(roverPosition,
+                    roverDirection, roverInstruction);
+            marsRover.setFinalCoordinates(finalCoordinates);
+            String coordinateString = marsRover.calculateNewCoordinates(plateau);
+            addCoordinateIfNotEmpty(finalCoordinates, coordinateString);
         }
-        ObstacleDetector.detectsObstacle(finalCoordinates);
+        detectAndHandleObstacles(finalCoordinates);
         return finalCoordinates;
+    }
+
+    private void detectAndHandleObstacles(ArrayList<String> finalCoordinates){
+        ObstacleDetector.detectsObstacle(finalCoordinates);
+    }
+
+    private void addCoordinateIfNotEmpty(ArrayList<String> finalCoordinates,
+                                         String coordinateString){
+        if(!coordinateString.isEmpty()){
+            finalCoordinates.add(coordinateString);
+        }
+    }
+
+    private Direction createRoverDirection(String[] roverPositionParts){
+        return Direction.valueOf(roverPositionParts[2]);
+    }
+
+    private Position createRoverPosition(String[] roverPositionParts){
+        int newXCoordinate = Integer.parseInt(roverPositionParts[0]);
+        int newYCoordinate = Integer.parseInt(roverPositionParts[1]);
+        return new Position(newXCoordinate, newYCoordinate);
+    }
+
+    private void validateRoverPositionParts(String[] roverPositionParts) throws
+            IllegalArgumentException {
+        if (roverPositionParts.length != 3) {
+            throw new IllegalArgumentException("Invalid Input positons!");
+        }
     }
 
     public ArrayList<String> processRoverData() throws CustomRoverException{
