@@ -2,10 +2,12 @@
 ## ***Version 1.0*** 
 
 ### **Installation**
+```
 - Clone this repository using
   git clone https://github.com/vswapna3202/Mars-Rover-Challenge.git
 - Navigate to project directory Mars-Rover-Challenge
 - Run 'mvn test' to build and test the project
+```
 
 ### **Application start**
 - You can start the application by executing main method from com.techreturners.MarsRoverApp
@@ -31,6 +33,7 @@ The output is its final position (final co-ordinates where it is facing) example
 Rover 1 is now at new position 1 3 N
 
 ### **Example:**
+```
 - Enter the plateau maximum co-ordinates in format x y : 5 5
 - Enter the current Rover position co-ordinates in format x y direction e.g. 1 2 N : 1 2 N
 - Enter the instruction for rover movement(L,R or M): LMLMLMLMM
@@ -40,6 +43,7 @@ Rover 1 is now at new position 1 3 N
 - Do you have more Rovers? (Y/N): N
 - Rover 1 is now at new position 1 3 N
 - Rover 2 is now at new position 5 1 E
+```
 
 ### **Assumptions:**
 - Mars contains only Plateau for this release

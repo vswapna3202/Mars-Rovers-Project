@@ -12,8 +12,21 @@ public class UserInterface {
             "Enter the plateau maximum co-ordinates in format x y : ",
             "Enter the current Rover position co-ordinates in"
                     +" format x y direction e.g. 1 2 N : ",
-            "Enter the instruction for rover movement(L,R or M): "
+            "Enter the instruction for rover movement(L,R or M): ",
+            "Do you want to continue moving rover(s) further?(Y/N): ",
+            "Do you want to give instruction for Rover: ",
+            " (Y/N): "
     };
+    public static final String INPUT_INSTRUCTIONS_TO_USER = "Invalid input entered. The inputs should be as follows:" +
+            "\nPlateau Co-ordinates: x y [where x and y should be any valid integers]" +
+            "\nRover Co-ordinates: x y Direction [where x and y are any valid integers," +
+            " Direction can be any of the following N,S,E,W,n,s,e,w]" +
+            "\nRover Instructions: instructions [where instructions can be L,R,M,l,r,m entered one after other" +
+            " without any spaces like lrlrlrr]";
+    public static final String MORE_ROVERS_Y_N = "Do you have more Rovers? (Y/N): ";
+    public static final String ENTER_EITHER_Y_OR_N = "Please enter either Y or N: ";
+    public static final String INPUT_YES = "Y";
+    public static final String INPUT_NO = "N";
 
     private final Scanner scanner;
     public UserInterface(){
@@ -44,12 +57,7 @@ public class UserInterface {
             inputString = scanner.nextLine().trim().toUpperCase();
             isValid = inputString.matches(pattern);
             if(!isValid){
-                System.out.println("Invalid input entered. The inputs should be as follows:" +
-                "\nPlateau Co-ordinates: x y [where x and y should be any valid integers]" +
-                "\nRover Co-ordinates: x y Direction [where x and y are any valid integers," +
-                " Direction can be any of the following N,S,E,W,n,s,e,w]" +
-                "\nRover Instructions: instructions [where instructions can be L,R,M,l,r,m entered one after other" +
-                " without any spaces like lrlrlrr]");
+                System.out.println(INPUT_INSTRUCTIONS_TO_USER);
             }
         }
         return inputString;
@@ -64,12 +72,12 @@ public class UserInterface {
             roverInstructionList.add(getRoverInstruction());
             String inputStr;
             while(true) {
-                System.out.print("Do you have more Rovers? (Y/N): ");
+                System.out.print(MORE_ROVERS_Y_N);
                 inputStr = scanner.nextLine().trim().toUpperCase();
-                if (inputStr.equals("Y") || inputStr.equals("N")) {
+                if (inputStr.equals(INPUT_YES) || inputStr.equals(INPUT_NO)) {
                     break;
                 }else{
-                    System.out.println("Please enter either Y or N");
+                    System.out.print(ENTER_EITHER_Y_OR_N);
                 }
             }
             if (inputStr.equals("N")) {
@@ -90,5 +98,16 @@ public class UserInterface {
                 System.out.println(coordinate);
             index += 1;
         }
+    }
+
+    public boolean continueRoverMovementUserInput(int index, int currentRoverNo){
+        if (currentRoverNo == -1) {
+            System.out.print(PROMPTS[index]);
+        }else{
+            System.out.print(PROMPTS[index]+currentRoverNo+PROMPTS[5]);
+        }
+        if (scanner.nextLine().trim().toUpperCase().equals(INPUT_YES))
+            return true;
+        return false;
     }
 }

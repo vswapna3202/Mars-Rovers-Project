@@ -155,6 +155,7 @@ public class MarsRoverAppTest {
                 MarsRoverTestData.plateauSizeList.get(0),
                 MarsRoverTestData.roverPositions.get(0),
                 MarsRoverTestData.roverInstructions.get(0),
+                MarsRoverTestData.userYesNo.get(1),
                 MarsRoverTestData.userYesNo.get(1));
 
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));

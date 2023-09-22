@@ -1,6 +1,9 @@
 package com.techreturners;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 public class ObstacleDetector {
     /*
@@ -8,8 +11,21 @@ public class ObstacleDetector {
     This method is primarily called when user chooses LR movement and does not choose
     MoveForward movement.
      */
-    public static void detectsObstacle(ArrayList<String> finalCoordinates){
-        if (finalCoordinates.size() != 1) {
+    public static void detectsObstacle(ArrayList<String> finalCoordinates) {
+        if (finalCoordinates.size() > 1) {
+            Set<String> uniqueCoordinates = new HashSet<>();
+            for(int i = 0; i < finalCoordinates.size() ; i++) {
+                String coordinate = finalCoordinates.get(i);
+                if (!uniqueCoordinates.add(coordinate)) {
+                    finalCoordinates.remove(i);
+                    finalCoordinates.add(i, "Rover Collision for Rover " +
+                            (i + 1) + " and Rover " + (uniqueCoordinates.size() ) +
+                            " not deploying Rover " + (i + 1) + " to location");
+                }
+            }
+        }
+    }
+    /*
             for (int k = 0; k < finalCoordinates.size()-1; k++) {
                 for (int j = k+1; j < finalCoordinates.size(); j++) {
                     if (finalCoordinates.get(k).equals(finalCoordinates.get(j))) {
@@ -23,7 +39,7 @@ public class ObstacleDetector {
                 }
             }
         }
-    }
+    }*/
 
     /*
     For every forward movement of the rover a check is done to find out if there

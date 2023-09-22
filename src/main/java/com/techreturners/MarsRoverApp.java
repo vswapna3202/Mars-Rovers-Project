@@ -5,6 +5,7 @@ import java.util.StringTokenizer;
 
 public class MarsRoverApp {
 
+    public static final String COLLISION_STRING = "Collision";
     private RoverDataBO roverDataBO;
     public MarsRoverApp(){}
 
@@ -31,20 +32,28 @@ public class MarsRoverApp {
         ArrayList<String> roverInstructionList = roverDataBO.getRoverInstructionsList();
         for(String roverPositionString : roverPositionsList) {
             String[] roverPositionParts = roverPositionString.split("\\s");
-            validateRoverPositionParts(roverPositionParts);
-            Position roverPosition = createRoverPosition(roverPositionParts);
-            Direction roverDirection = createRoverDirection(roverPositionParts);
             Instruction roverInstruction = new Instruction(roverInstructionList.get(
                     roverPositionsList.indexOf(roverPositionString)));
-
-            Rover marsRover = new Rover(roverPosition,
-                    roverDirection, roverInstruction);
-            marsRover.setFinalCoordinates(finalCoordinates);
-            String coordinateString = marsRover.calculateNewCoordinates(plateau);
-            addCoordinateIfNotEmpty(finalCoordinates, coordinateString);
+            assignNewRoverCoordinates(plateau, roverPositionParts, roverInstruction, finalCoordinates);
         }
         detectAndHandleObstacles(finalCoordinates);
         return finalCoordinates;
+    }
+
+    private void assignNewRoverCoordinates(Plateau plateau,
+                                           String[] roverPositionParts,
+                                           Instruction roverInstruction,
+                                           ArrayList<String> finalCoordinates)
+            throws CustomRoverException {
+        validateRoverPositionParts(roverPositionParts);
+        Position roverPosition = createRoverPosition(roverPositionParts);
+        Direction roverDirection = createRoverDirection(roverPositionParts);
+
+        Rover marsRover = new Rover(roverPosition,
+                roverDirection, roverInstruction);
+        marsRover.setFinalCoordinates(finalCoordinates);
+        String coordinateString = marsRover.calculateNewCoordinates(plateau);
+        addCoordinateIfNotEmpty(finalCoordinates, coordinateString);
     }
 
     private void detectAndHandleObstacles(ArrayList<String> finalCoordinates){
@@ -79,7 +88,7 @@ public class MarsRoverApp {
     private void validateRoverPositionParts(String[] roverPositionParts) throws
             IllegalArgumentException {
         if (roverPositionParts.length != 3) {
-            throw new IllegalArgumentException("Invalid Input positons!");
+            throw new IllegalArgumentException("Invalid Input positions!");
         }
     }
 
@@ -92,20 +101,55 @@ public class MarsRoverApp {
     public void startApplication(){
         boolean isValidScenario = false;
         UserInterface userInterface;
+        ArrayList<String> finalCoordinates;
         while(!isValidScenario) {
             try {
                 userInterface = new UserInterface();
                 RoverDataBO roverDataBO = userInterface.collectRoverData();
                 setRoverDataBO(roverDataBO);
-
-                userInterface.displayRoverFinalCoordinates(processRoverData());
+                finalCoordinates = processRoverData();
+                userInterface.displayRoverFinalCoordinates(finalCoordinates);
                 isValidScenario = true;
-                userInterface.getScanner().close();
+                continueRoverMovement(userInterface, finalCoordinates);
             } catch (CustomRoverException cre) {
                 System.out.println(" Please Re-enter Rover data! " + cre.getMessage());
             }
         }
     }
+
+    public void continueRoverMovement(UserInterface userInterface,
+                                      ArrayList<String> roverCoordinates)
+        throws CustomRoverException{
+        boolean continueRoverMovement =
+                userInterface.continueRoverMovementUserInput(3, -1);
+
+        Plateau plateau = assignPlateauSize(this.roverDataBO);
+        while(continueRoverMovement){
+            ArrayList<String> finalCoordinates = new ArrayList<>();
+            for(int i = 0; i < roverCoordinates.size(); i++ ) {
+                if (!roverCoordinates.get(i).contains(COLLISION_STRING)) {
+                    boolean instructionYes =
+                            userInterface.continueRoverMovementUserInput(
+                                    4, (i + 1));
+                    if (instructionYes) {
+                        String[] roverPositionParts =
+                                roverCoordinates.get(i).split("\\s");
+                        Instruction roverInstruction =
+                                new Instruction(userInterface.getRoverInstruction());
+                        assignNewRoverCoordinates(plateau, roverPositionParts, roverInstruction, finalCoordinates);
+                    } else {
+                        finalCoordinates.add(roverCoordinates.get(i));
+                    }
+                    detectAndHandleObstacles(finalCoordinates);
+                    roverCoordinates.set(i, finalCoordinates.get(i));
+                    userInterface.displayRoverFinalCoordinates(finalCoordinates);
+                }
+            }
+            continueRoverMovement = userInterface.continueRoverMovementUserInput(3, -1);
+        }
+        userInterface.getScanner().close();
+    }
+
     public void setRoverDataBO(RoverDataBO roverDataBO) {
         this.roverDataBO = roverDataBO;
     }
