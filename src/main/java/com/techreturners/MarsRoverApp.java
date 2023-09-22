@@ -36,7 +36,7 @@ public class MarsRoverApp {
                     roverPositionsList.indexOf(roverPositionString)));
             assignNewRoverCoordinates(plateau, roverPositionParts, roverInstruction, finalCoordinates);
         }
-        detectAndHandleObstacles(finalCoordinates);
+        //detectAndHandleObstacles(finalCoordinates);
         return finalCoordinates;
     }
 
@@ -126,7 +126,8 @@ public class MarsRoverApp {
 
         Plateau plateau = assignPlateauSize(this.roverDataBO);
         while(continueRoverMovement){
-            ArrayList<String> finalCoordinates = new ArrayList<>();
+            ArrayList<String> newCoordinates = new ArrayList<>();
+            int j = 0;
             for(int i = 0; i < roverCoordinates.size(); i++ ) {
                 if (!roverCoordinates.get(i).contains(COLLISION_STRING)) {
                     boolean instructionYes =
@@ -137,13 +138,14 @@ public class MarsRoverApp {
                                 roverCoordinates.get(i).split("\\s");
                         Instruction roverInstruction =
                                 new Instruction(userInterface.getRoverInstruction());
-                        assignNewRoverCoordinates(plateau, roverPositionParts, roverInstruction, finalCoordinates);
+                        assignNewRoverCoordinates(plateau, roverPositionParts, roverInstruction, newCoordinates);
                     } else {
-                        finalCoordinates.add(roverCoordinates.get(i));
+                        newCoordinates.add(roverCoordinates.get(i));
                     }
-                    detectAndHandleObstacles(finalCoordinates);
-                    roverCoordinates.set(i, finalCoordinates.get(i));
-                    userInterface.displayRoverFinalCoordinates(finalCoordinates);
+                    //detectAndHandleObstacles(finalCoordinates);
+                    roverCoordinates.set(i, newCoordinates.get(j));
+                    j++;
+                    userInterface.displayRoverFinalCoordinates(newCoordinates);
                 }
             }
             continueRoverMovement = userInterface.continueRoverMovementUserInput(3, -1);

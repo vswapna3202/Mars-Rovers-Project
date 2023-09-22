@@ -2,15 +2,14 @@ package com.techreturners;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 public class ObstacleDetector {
     /*
-    This method checks if two rovers are going to be deployed at same location.
-    This method is primarily called when user chooses LR movement and does not choose
-    MoveForward movement.
-     */
+        This method checks if two rovers are going to be deployed at same location.
+        This method is primarily called when user chooses LR movement and does not choose
+        MoveForward movement.
+         */
     public static void detectsObstacle(ArrayList<String> finalCoordinates) {
         if (finalCoordinates.size() > 1) {
             Set<String> uniqueCoordinates = new HashSet<>();
@@ -18,9 +17,12 @@ public class ObstacleDetector {
                 String coordinate = finalCoordinates.get(i);
                 if (!uniqueCoordinates.add(coordinate)) {
                     finalCoordinates.remove(i);
-                    finalCoordinates.add(i, "Rover Collision for Rover " +
+                    /*finalCoordinates.add(i, "Rover Collision for Rover " +
                             (i + 1) + " and Rover " + (uniqueCoordinates.size() ) +
-                            " not deploying Rover " + (i + 1) + " to location");
+                            " not deploying Rover " + (i + 1) + " to location");*/
+                    finalCoordinates.add(i ,"Collision intercepted at " +
+                            "co-ordinates "+coordinate+" Rover not deployed as a rover "+
+                            "is already positioned here");
                 }
             }
         }
@@ -49,16 +51,23 @@ public class ObstacleDetector {
     public static boolean detectsObstacle(ArrayList<String> finalCoordinates,
                                        int currentXCoordinate,
                                        int currentYCoordinate){
+        if (finalCoordinates == null){
+            return false;
+        }
         int finalCoordinatesSize = finalCoordinates.size();
         for(int i = 0; i < finalCoordinatesSize; i++) {
             String[] parts = finalCoordinates.get(i).split("\\s");
-            if (parts[0].matches("\\d") && parts[1].matches("\\d")) {
+            if (parts[0].matches("\\d+") && parts[1].matches("\\d+")) {
                 int obstacleRoverXCoordinate = Integer.parseInt(parts[0]);
                 int obstacleRoverYCoordinate = Integer.parseInt(parts[1]);
                 if (obstacleRoverXCoordinate == currentXCoordinate &&
                         obstacleRoverYCoordinate == currentYCoordinate) {
-                    finalCoordinates.add(i+1, "Rover Collision! Another Rover on "+
-                            "rover route! Not deploying Rover to location");
+                    //finalCoordinates.add(i+1, "Rover Collision with Rover "+(i+1)+" Another Rover on "+
+                      //      "rover route! Not deploying Rover to location");
+                    finalCoordinates.add(i+1,
+                            "Collision intercepted at co-ordinates "+obstacleRoverXCoordinate+
+                            " "+obstacleRoverYCoordinate+" Rover not deployed as " +
+                                    " a rover already is already positioned here");
                     return true;
                 }
             }

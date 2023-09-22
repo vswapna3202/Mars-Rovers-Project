@@ -19,6 +19,7 @@ public class Rover extends SpaceVehicles {
         this.finalCoordinates = finalCoordinates;
     }
 
+    @Override
     protected void rotateLeft(){
         int numDirections = Direction.values().length;
         Arrays.stream(Direction.values())
@@ -28,6 +29,7 @@ public class Rover extends SpaceVehicles {
                 .ifPresent(newDirection -> direction = newDirection);
     }
 
+    @Override
     protected void rotateRight(){
         int numDirections = Direction.values().length;
         Arrays.stream(Direction.values())
@@ -37,6 +39,7 @@ public class Rover extends SpaceVehicles {
                 .ifPresent(newDirection -> direction = newDirection);
     }
 
+    @Override
     protected boolean moveForward(Plateau plateau)
             throws CustomRoverException {
         int currentXCoordinate = position.getxCoordinate();
@@ -62,6 +65,11 @@ public class Rover extends SpaceVehicles {
     public String calculateNewCoordinates(Plateau plateau)
             throws CustomRoverException{
         boolean obstacleFlag = false;
+        if (!this.finalCoordinates.isEmpty() && this.finalCoordinates.size() >= 1){
+             obstacleFlag = ObstacleDetector.detectsObstacle(this.finalCoordinates,
+                    position.getxCoordinate(), position.getyCoordinate());
+             if (obstacleFlag) return "";
+        }
         for(char instructionChar : instruction.getInstruction().toCharArray()){
             switch (instructionChar) {
                 case 'L' -> rotateLeft();

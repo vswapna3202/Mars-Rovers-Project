@@ -25,12 +25,12 @@ public class MarsRoverTestData {
             "","ABABABCCC","121212333","%$%$%$£££","L M L M  M ","lml"};
 
     public static String mainMethodOutputPattern = "Rover 1 is now deployed at new position (.+)";
-    public static String obstacleErrorMessage = "Rover Collision for Rover 2" +
-        " and Rover 1 not deploying Rover 2 to location";
+    public static String obstacleErrorMessage = "Collision intercepted at co-ordinates " +
+            "1 4 Rover not deployed as a rover already is already positioned here";
 
     public static String obstacleErrorMessageWhenRoverInWay =
-            "Rover Collision! Another Rover on rover route! Not deploying Rover"+
-                    " to location";
+            "Collision intercepted at co-ordinates 1 4 Rover not deployed as  a rover already " +
+                    "is already positioned here";
 
     /*
     Uncomment when testing ObstacleDetectorTest.testReadObstaclePositionsInvalidData

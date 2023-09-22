@@ -27,6 +27,7 @@ public class UserInterface {
     public static final String ENTER_EITHER_Y_OR_N = "Please enter either Y or N: ";
     public static final String INPUT_YES = "Y";
     public static final String INPUT_NO = "N";
+    public static final String COLLISION_STRING = "Collision";
 
     private final Scanner scanner;
     public UserInterface(){
@@ -91,7 +92,7 @@ public class UserInterface {
     public void displayRoverFinalCoordinates(ArrayList<String> finalCoordinates){
         int index = 1;
         for (String coordinate : finalCoordinates){
-            if (coordinate.length() == 5)
+            if (!coordinate.contains(COLLISION_STRING))
                 System.out.println("Rover "+index+" is now deployed at new position "
                         +coordinate);
             else
@@ -106,8 +107,11 @@ public class UserInterface {
         }else{
             System.out.print(PROMPTS[index]+currentRoverNo+PROMPTS[5]);
         }
-        if (scanner.nextLine().trim().toUpperCase().equals(INPUT_YES))
-            return true;
-        return false;
+        String inputStr = scanner.nextLine().trim().toUpperCase();
+        while(!inputStr.equals(INPUT_YES) && !inputStr.equals(INPUT_NO)) {
+            System.out.print("Please enter Y or N as inputs: ");
+            inputStr = scanner.nextLine().trim().toUpperCase();
+        }
+        return inputStr.equals(INPUT_YES);
     }
 }
