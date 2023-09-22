@@ -20,7 +20,7 @@ public class MarsRoverApp {
             yCoordinate = Integer.parseInt(tokenizer.nextToken());
         }catch(NumberFormatException nfe){
             throw new CustomRoverException("Invalid inputs entered for Plateau"+
-            "co-ordinates. Please enter integers only");
+            " co-ordinates. Please enter integers only");
         }
         return new RectanglePlateau(xCoordinate, yCoordinate);
     }
@@ -79,7 +79,7 @@ public class MarsRoverApp {
             newXCoordinate = Integer.parseInt(roverPositionParts[0]);
             newYCoordinate = Integer.parseInt(roverPositionParts[1]);
         }catch(NumberFormatException nfe){
-            throw new CustomRoverException("Co-ordinates entered are invalid. Please" +
+            throw new CustomRoverException("Rover position co-ordinates entered are invalid. Please" +
                     " enter valid integers only");
         }
         return new Position(newXCoordinate, newYCoordinate);
@@ -112,7 +112,8 @@ public class MarsRoverApp {
                 isValidScenario = true;
                 continueRoverMovement(userInterface, finalCoordinates);
             } catch (CustomRoverException cre) {
-                System.out.println(" Please Re-enter Rover data! " + cre.getMessage());
+                System.out.println(" Please Re-enter Rover data as invalid data has been entered! "
+                        + cre.getMessage());
             }
         }
     }

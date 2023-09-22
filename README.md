@@ -19,18 +19,23 @@ Rover can perform actions such as rotating left and rotating right by 90 degrees
     - The rover must stay within its designated boundary in the plateau
 
 ### **Inputs:**
-- <em>PLATEAU SIZE</em>: Specified as 5 5 where 5 5 is the maximum boundary of the plateau. Minimum 
+```
+- PLATEAU SIZE: Specified as 5 5 where 5 5 is the maximum boundary of the plateau. Minimum 
   boundary is always 0 0
-- <em>ROVER POSITION</em>: Specified as 1 2 N where 1 2 are position where Rover currently is and
+- ROVER POSITION: Specified as 1 2 N where 1 2 are position where Rover currently is and
   N is the direction the rover is facing. It can face N, E, S, W
-- <em>ROVER INSTRUCTIONS</em>: LMLMLMLMM specifies the rotations and movements the rover needs to 
+- ROVER INSTRUCTIONS: LMLMLMLMM specifies the rotations and movements the rover needs to 
   do. It takes any three instructions L(rotate left), M(move forward), R(rotate right)
-- <em>DO YOU WANT TO ENTER MORE ROVERS (Y/N)</em>: Input Y if more rovers data needs to be entered
+- DO YOU WANT TO ENTER MORE ROVERS (Y/N): Input Y if more rovers data needs to be entered
   N if only this single rover needs to rotate and/or move
+  ```
+
 
 ### **Outputs:**
 The output is its final position (final co-ordinates where it is facing) example
+```
 Rover 1 is now at new position 1 3 N
+```
 
 ### **Example:**
 ```
@@ -43,6 +48,13 @@ Rover 1 is now at new position 1 3 N
 - Do you have more Rovers? (Y/N): N
 - Rover 1 is now at new position 1 3 N
 - Rover 2 is now at new position 5 1 E
+- Do you want to continue moving rover(s) further?(Y/N): Y
+- Do you want to give instruction for Rover: 1 (Y/N): M
+- Rover 1 is now deployed at new position 1 3 N
+- Do you want to give instruction for Rover: 2 (Y/N): N
+- Rover 1 is now deployed at new position 1 3 N
+- Rover 2 is now deployed at new position 5 1 E
+- Do you want to continue moving rover(s) further?(Y/N): N
 ```
 
 ### **Assumptions:**
@@ -66,4 +78,5 @@ Rover 1 is now at new position 1 3 N
 - Plateaus can not only be rectangular can be other shapes like circle, hexagon etc
 - Other vehicles can also roam on the Mars terrain
 - Rover positions can be stored in a file and recorded
+
   
