@@ -36,7 +36,6 @@ public class MarsRoverApp {
                     roverPositionsList.indexOf(roverPositionString)));
             assignNewRoverCoordinates(plateau, roverPositionParts, roverInstruction, finalCoordinates);
         }
-        //detectAndHandleObstacles(finalCoordinates);
         return finalCoordinates;
     }
 
@@ -54,10 +53,6 @@ public class MarsRoverApp {
         marsRover.setFinalCoordinates(finalCoordinates);
         String coordinateString = marsRover.calculateNewCoordinates(plateau);
         addCoordinateIfNotEmpty(finalCoordinates, coordinateString);
-    }
-
-    private void detectAndHandleObstacles(ArrayList<String> finalCoordinates){
-        ObstacleDetector.detectsObstacle(finalCoordinates);
     }
 
     private void addCoordinateIfNotEmpty(ArrayList<String> finalCoordinates,
@@ -142,7 +137,6 @@ public class MarsRoverApp {
                     } else {
                         newCoordinates.add(roverCoordinates.get(i));
                     }
-                    //detectAndHandleObstacles(finalCoordinates);
                     roverCoordinates.set(i, newCoordinates.get(j));
                     j++;
                     userInterface.displayRoverFinalCoordinates(newCoordinates);

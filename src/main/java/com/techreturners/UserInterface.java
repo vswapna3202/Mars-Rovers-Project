@@ -17,12 +17,11 @@ public class UserInterface {
             "Do you want to give instruction for Rover: ",
             " (Y/N): "
     };
-    public static final String INPUT_INSTRUCTIONS_TO_USER = "Invalid input entered. The inputs should be as follows:" +
-            "\nPlateau Co-ordinates: x y [where x and y should be any valid integers]" +
-            "\nRover Co-ordinates: x y Direction [where x and y are any valid integers," +
-            " Direction can be any of the following N,S,E,W,n,s,e,w]" +
-            "\nRover Instructions: instructions [where instructions can be L,R,M,l,r,m entered one after other" +
-            " without any spaces like lrlrlrr]";
+    public static final String INPUT_INSTRUCTIONS_TO_USER = """
+            Invalid input entered. The inputs should be as follows:
+            Plateau Co-ordinates: x y [where x and y should be any valid integers]
+            Rover Co-ordinates: x y Direction [where x and y are any valid integers, Direction can be any of the following N,S,E,W,n,s,e,w]
+            Rover Instructions: instructions [where instructions can be L,R,M,l,r,m entered one after other without any spaces like lrlrlrr]""";
     public static final String MORE_ROVERS_Y_N = "Do you have more Rovers? (Y/N): ";
     public static final String ENTER_EITHER_Y_OR_N = "Please enter either Y or N: ";
     public static final String INPUT_YES = "Y";

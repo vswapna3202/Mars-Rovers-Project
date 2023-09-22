@@ -65,7 +65,7 @@ public class Rover extends SpaceVehicles {
     public String calculateNewCoordinates(Plateau plateau)
             throws CustomRoverException{
         boolean obstacleFlag = false;
-        if (!this.finalCoordinates.isEmpty() && this.finalCoordinates.size() >= 1){
+        if (!this.finalCoordinates.isEmpty()){
              obstacleFlag = ObstacleDetector.detectsObstacle(this.finalCoordinates,
                     position.getxCoordinate(), position.getyCoordinate());
              if (obstacleFlag) return "";

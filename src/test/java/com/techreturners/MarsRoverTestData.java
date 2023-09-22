@@ -28,10 +28,6 @@ public class MarsRoverTestData {
     public static String obstacleErrorMessage = "Collision intercepted at co-ordinates " +
             "1 4 Rover not deployed as a rover already is already positioned here";
 
-    public static String obstacleErrorMessageWhenRoverInWay =
-            "Collision intercepted at co-ordinates 1 4 Rover not deployed as  a rover already " +
-                    "is already positioned here";
-
     /*
     Uncomment when testing ObstacleDetectorTest.testReadObstaclePositionsInvalidData
     method
