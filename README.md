@@ -39,22 +39,24 @@ Rover 1 is now at new position 1 3 N
 
 ### **Example:**
 ```
-- Enter the plateau maximum co-ordinates in format x y : 5 5
-- Enter the current Rover position co-ordinates in format x y direction e.g. 1 2 N : 1 2 N
-- Enter the instruction for rover movement(L,R or M): LMLMLMLMM
-- Do you have more Rovers? (Y/N): Y
-- Enter the current Rover position co-ordinates in format x y direction e.g. 1 2 N : 3 3 E
-- Enter the instruction for rover movement(L,R or M): MMRMMRMRRM
-- Do you have more Rovers? (Y/N): N
-- Rover 1 is now at new position 1 3 N
-- Rover 2 is now at new position 5 1 E
-- Do you want to continue moving rover(s) further?(Y/N): Y
-- Do you want to give instruction for Rover: 1 (Y/N): M
-- Rover 1 is now deployed at new position 1 3 N
-- Do you want to give instruction for Rover: 2 (Y/N): N
-- Rover 1 is now deployed at new position 1 3 N
-- Rover 2 is now deployed at new position 5 1 E
-- Do you want to continue moving rover(s) further?(Y/N): N
+Enter the plateau maximum co-ordinates in format x y : 5 5
+Enter the current Rover position co-ordinates in format x y direction e.g. 1 2 N : 1 2 N
+Enter the instruction for rover movement(L,R or M): LMLMLMLMM
+Do you have more Rovers? (Y/N): Y
+Enter the current Rover position co-ordinates in format x y direction e.g. 1 2 N : 3 3 E
+Enter the instruction for rover movement(L,R or M): MMRMMRMRRM
+Do you have more Rovers? (Y/N): N
+Rover 1 is now deployed at new position 1 3 N
+Rover 2 is now deployed at new position 5 1 E
+Do you want to continue moving rover(s) further?(Y/N): Y
+Do you want to give instruction for Rover: 1 (Y/N): Y
+Enter the instruction for rover movement(L,R or M): MM
+Rover 1 is now deployed at new position 1 5 N
+Do you want to give instruction for Rover: 2 (Y/N): Y
+Enter the instruction for rover movement(L,R or M): LM
+Rover 1 is now deployed at new position 1 5 N
+Rover 2 is now deployed at new position 5 2 N
+Do you want to continue moving rover(s) further?(Y/N): N
 ```
 
 ### **Assumptions:**
@@ -62,9 +64,11 @@ Rover 1 is now at new position 1 3 N
 - Plateau is rectangular for this release
 - Rovers move sequentially that is one rover would finish its movement before next
   rover moves
-- Plateau boundary min position is always 0 0 and max is specified by user
+- Plateau boundary minimum position is always 0 0 and maximum is specified by user
 - Rover will not be deployed or move forward as per instructions if an obstacle exists 
-  in its path
+  in its path and a message will be displayed to user
+- Rovers which are deployed successfully only can continue their movements after user
+  specifies the further movement instructions
 
 ### **Future Considerations:**
 - Rover can not only have plateaus it can have other criteria like mounds 
