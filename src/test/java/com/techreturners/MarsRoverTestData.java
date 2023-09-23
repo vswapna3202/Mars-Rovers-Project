@@ -15,7 +15,7 @@ public class MarsRoverTestData {
     public static ArrayList<String> userYesNo =
             new ArrayList<>(Arrays.asList("Y","N"));
     public static ArrayList<String> finalRoverPositions =
-            new ArrayList<>(Arrays.asList("1 3 N","5 1 E","2 2 S","3 3 N","1 4 N"));
+            new ArrayList<>(Arrays.asList("1 3 N","5 1 E","2 2 S","3 3 N","1 4 N","1 5 N"));
     public static String[] plateauInvalidData = {
             "5, 5","A B","% $","","1  2  "};
     public static String[] roverPositionsInvalidData = {

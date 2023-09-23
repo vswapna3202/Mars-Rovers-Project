@@ -150,6 +150,7 @@ public class MarsRoverAppTest {
         originalOut = System.out;
         outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
+
         //Simulating input for testing main method
         String simulatedInput = String.join("\n",
                 MarsRoverTestData.plateauSizeList.get(0),
@@ -168,6 +169,67 @@ public class MarsRoverAppTest {
         String actualOutput = matcher.group(1);
 
         assertEquals(MarsRoverTestData.finalRoverPositions.get(0), actualOutput);
-
     }
+    @Test
+    public void testContinueRoverMovementYesForFurtherMovement()
+            throws CustomRoverException {
+
+        ArrayList<String> roverCoordinates = new ArrayList<>();
+        roverCoordinates.add(MarsRoverTestData.finalRoverPositions.get(0));
+        roverCoordinates.add(MarsRoverTestData.finalRoverPositions.get(1));
+        originalOut = System.out;
+        outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+        String[] userInput = {
+                MarsRoverTestData.userYesNo.get(0),
+                MarsRoverTestData.userYesNo.get(0),
+                MarsRoverTestData.roverInstructions.get(2),
+                MarsRoverTestData.userYesNo.get(0),
+                MarsRoverTestData.roverInstructions.get(5),
+                MarsRoverTestData.userYesNo.get(1)
+        };
+
+        String simulatedInput = String.join("\n", userInput);
+
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
+        marsRoverApp = new MarsRoverApp();
+        marsRoverApp.setRoverDataBO(
+                marsRoverTestData.initialiseRoverDataBOObject(false));
+        marsRoverApp.continueRoverMovement( new UserInterface(), roverCoordinates);
+        String consoleOutput = outputStream.toString();
+
+        Pattern pattern = Pattern.compile(MarsRoverTestData.mainMethodOutputPattern);
+        Matcher matcher = pattern.matcher(consoleOutput);
+        assertTrue(matcher.find());
+        String actualOutput = matcher.group(1);
+
+        assertEquals(MarsRoverTestData.finalRoverPositions.get(5), actualOutput);
+    }
+
+    @Test
+    public void testContinueRoverMovementNoForFurtherMovement()
+            throws CustomRoverException {
+
+        ArrayList<String> roverCoordinates = new ArrayList<>();
+        roverCoordinates.add(MarsRoverTestData.finalRoverPositions.get(0));
+        roverCoordinates.add(MarsRoverTestData.finalRoverPositions.get(1));
+        originalOut = System.out;
+        outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+
+        String simulatedInput = String.join("\n",
+                MarsRoverTestData.userYesNo.get(1));
+
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
+        marsRoverApp = new MarsRoverApp();
+        marsRoverApp.setRoverDataBO(
+                marsRoverTestData.initialiseRoverDataBOObject(false));
+        marsRoverApp.continueRoverMovement( new UserInterface(), roverCoordinates);
+        String consoleOutput = outputStream.toString();
+
+        Pattern pattern = Pattern.compile(MarsRoverTestData.mainMethodOutputPattern);
+        Matcher matcher = pattern.matcher(consoleOutput);
+        assertFalse(matcher.find());
+    }
+
 }
