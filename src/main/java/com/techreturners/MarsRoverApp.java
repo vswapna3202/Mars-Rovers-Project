@@ -120,29 +120,36 @@ public class MarsRoverApp {
                 userInterface.continueRoverMovementUserInput(3, -1);
 
         Plateau plateau = assignPlateauSize(this.roverDataBO);
+
         while(continueRoverMovement){
-            ArrayList<String> newCoordinates = new ArrayList<>();
-            int j = 0;
-            for(int i = 0; i < roverCoordinates.size(); i++ ) {
-                if (!roverCoordinates.get(i).contains(COLLISION_STRING)) {
-                    boolean instructionYes =
-                            userInterface.continueRoverMovementUserInput(
-                                    4, (i + 1));
-                    if (instructionYes) {
-                        String[] roverPositionParts =
-                                roverCoordinates.get(i).split("\\s");
-                        Instruction roverInstruction =
-                                new Instruction(userInterface.getRoverInstruction());
-                        assignNewRoverCoordinates(plateau, roverPositionParts, roverInstruction, newCoordinates);
-                    } else {
-                        newCoordinates.add(roverCoordinates.get(i));
+            try {
+                ArrayList<String> newCoordinates = new ArrayList<>();
+                int j = 0;
+                for (int i = 0; i < roverCoordinates.size(); i++) {
+                    if (!roverCoordinates.get(i).contains(COLLISION_STRING)) {
+                        boolean instructionYes =
+                                userInterface.continueRoverMovementUserInput(
+                                        4, (i + 1));
+                        if (instructionYes) {
+                            String[] roverPositionParts =
+                                    roverCoordinates.get(i).split("\\s");
+                            Instruction roverInstruction =
+                                    new Instruction(userInterface.getRoverInstruction());
+                            assignNewRoverCoordinates(plateau, roverPositionParts, roverInstruction, newCoordinates);
+                        } else {
+                            newCoordinates.add(roverCoordinates.get(i));
+                        }
+                        roverCoordinates.set(i, newCoordinates.get(j));
+                        j++;
+                        userInterface.displayRoverFinalCoordinates(newCoordinates);
                     }
-                    roverCoordinates.set(i, newCoordinates.get(j));
-                    j++;
-                    userInterface.displayRoverFinalCoordinates(newCoordinates);
                 }
+                continueRoverMovement = userInterface.continueRoverMovementUserInput(3, -1);
+            }catch(ArrayIndexOutOfBoundsException e){
+                userInterface.getScanner().close();
+                throw new CustomRoverException("Something went wrong while" +
+                        " rover was moving!");
             }
-            continueRoverMovement = userInterface.continueRoverMovementUserInput(3, -1);
         }
         userInterface.getScanner().close();
     }
