@@ -28,6 +28,13 @@ Rover can perform actions such as rotating left and rotating right by 90 degrees
   do. It takes any three instructions L(rotate left), M(move forward), R(rotate right)
 - DO YOU WANT TO ENTER MORE ROVERS (Y/N): Input Y if more rovers data needs to be entered
   N if only this single rover needs to rotate and/or move
+- DO YOU WANT TO CONTINUE MOVING ROVER(S) FURTHER (Y/N): Input Y if you want rover(s) to
+  contiue moving over the plateau and N if you want to stop rovers from moving
+- DO YOU WANT TO GIVE INSTRUCTION FOR ROVER: 1 (Y/N): Input Y if you want Rover 1 to
+  continue moving to a new location and N if you do not want the rover to move
+- ENTER THE INSTRUCTION FOR ROVER MOVEMENT(L,R OR M): LMM specifies the rotations and 
+  movements the rover needs to do to continue moving to its new position. It is same value
+  as ROVER INSTRUCTIONS L(rotate left), M(move forward), R(rotate right)
   ```
 
 
@@ -69,6 +76,8 @@ Do you want to continue moving rover(s) further?(Y/N): N
   in its path and a message will be displayed to user
 - Rovers which are deployed successfully only can continue their movements after user
   specifies the further movement instructions
+- Rovers whose further instructions are input by user alone will continue their movements 
+  further and switching between rovers functionality is not implemented in this release 
 
 ### **Future Considerations:**
 - Rover can not only have plateaus it can have other criteria like mounds 
@@ -82,5 +91,8 @@ Do you want to continue moving rover(s) further?(Y/N): N
 - Plateaus can not only be rectangular can be other shapes like circle, hexagon etc
 - Other vehicles can also roam on the Mars terrain
 - Rover positions can be stored in a file and recorded
+- Rover movements are continued if instructions provided by user, in future the user
+  should be able to go back to a standing rover and give instructions at a later point.
+  Switching between rovers for instructions could be implemented.
 
   
